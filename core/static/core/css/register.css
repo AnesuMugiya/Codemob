@@ -1,0 +1,130 @@
+/*-----------
+Fonts 
+-------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,900&display=swap');
+
+/*-----------
+Global CSS 
+------------*/
+:root{
+     --main-color: #482eb5;
+     --color-1: #e91e63;
+     --color-2: #f5ae10;
+     --color-3: #09d69c;
+     --bg-dark: #23272a;
+     --main-to-dark-color: var(--main-color);
+     --dark-to-main-color: var(--bg-dark);
+     --shadow-black-100: 0 1px 3px 3px rgba(0, 0, 0, 0.1);
+     --shadow-black-300: 0 5px 10px 10px rgba(0,0,0,0.2);
+     --black-900: #000000;
+     --black-400: #555555;
+     --black-100: #f6f6f6;
+     --black-000: #ffffff;
+     --black-alpha-100: rgba(0,0,0,0.5);
+     --nav-color: black;
+     --bg-gradient: linear-gradient(43deg, #2a44c6 2%, #ab3ad5 65%);
+}
+
+body,
+html {
+     margin: 0;
+     padding: 0;
+     height: 100%;
+     font-family: 'Poppins', Arial, Helvetica, sans-serif;
+     background:var(--bg-gradient);
+     background-repeat: no-repeat;
+}
+.container{
+     min-height: 100vh;
+}
+h3{
+     font-size: 20px;
+}
+.navbar{
+     background-color: transparent;
+     overflow-x: hidden;
+     padding-bottom: 0;
+}
+.navbar > .container{
+     padding: 0 15px;
+}
+.navbar .navbar-brand{
+     margin-top: 20px;
+     font-size: 25px;
+     color: #000000;
+     font-weight: 500;
+     text-transform: capitalize;
+}
+.user_card {
+     width: 490px;
+     margin-bottom: auto;
+     position: relative;
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     padding: 10px;
+
+}
+.user_card.login{
+     margin-top: auto;
+}
+.user_card.signup{
+     margin-top: 30px;
+}
+input{
+     background: transparent !important;
+     border: none !important;
+}
+
+.input-group{
+     align-items: center;
+     width: 350px;
+     border-radius: 5px;
+     background: #edf2f7;
+     height: 48px;
+     font-size: 16px;
+     border: none;
+     margin: 20px 0 20px 0!important;
+}
+.form_container {
+     margin-top: 20px;
+}
+
+#form-title{
+     color: #000;
+}
+.login_btn {
+     height: 48px;
+     width: 350px;
+     margin-top: 20px;
+     width: 100%;
+     background: #000 !important;
+     color: white !important;
+     border-radius: 50px;
+}
+.login_btn:focus {
+     box-shadow: none !important;
+     outline: 0px !important;
+}
+.input-group-text {
+     background: transparent !important;
+     color: #404040!important;
+     border: none !important;
+
+}
+.input-group-text i{
+     margin-left: 10px;
+}
+.input_user,
+.input_pass:focus {
+     border: none;
+     background-color: #edf2f7 !important;
+     box-shadow: none !important;
+     outline: 0px !important;
+}
+#messages{
+     background-color: grey;
+     color: #fff;
+     padding: 10px;
+     margin-top: 10px;
+}

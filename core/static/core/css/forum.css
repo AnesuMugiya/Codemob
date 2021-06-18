@@ -1,0 +1,185 @@
+/* ============= FORUM PAGE ===========*/
+
+.avatar .avatar-img {
+   width: 100%;
+   height: 100%;
+   -o-object-fit: cover;
+   object-fit: cover;
+}
+
+.avatar-group {
+   display: -webkit-inline-box;
+   display: -ms-inline-flexbox;
+   display: inline-flex;
+}
+
+.avatar-group .avatar {
+   font-size: .9rem;
+   width: 2.1rem;
+   height: 2.1rem;
+}
+
+.avatar-group .avatar .avatar-img {
+   border: 2px solid #fff;
+}
+
+.avatar-group.avatar-group-overlapped .avatar {
+   margin-right: -13px;
+}
+
+.avatar-group.avatar-group-overlapped .avatar:hover {
+   z-index: 1;
+}
+
+.avatar-group.avatar-group-sm.avatar-group-overlapped .avatar {
+   margin-right: -10px;
+}
+   .page-heading {
+       border-top: 0;
+       padding: 0 10px 20px 10px;
+   }
+   
+   .forum-post-container .media {
+     margin: 10px 10px 10px 10px;
+     padding: 20px 10px 20px 10px;
+     border-bottom: 1px solid #f1f1f1;
+   }
+
+   .forum-post-info {
+     padding: 9px 12px 6px 12px;
+     background: #f9f9f9;
+     border: 1px solid #f1f1f1;
+     justify-content: center;
+     align-items: center;
+     
+   }
+   .media-body > .media {
+     background: #f9f9f9;
+     border-radius: 3px;
+     border: 1px solid #f1f1f1;
+   }
+   .forum-item {
+     margin: 10px 0;
+     padding: 10px 0 20px;
+     border-bottom: 1px solid #f1f1f1;
+   }
+   .views-number {
+     margin-top: 5px;
+     font-size: 20px;
+     line-height: 18px;
+     font-weight: 400;
+   }
+   .forum-container,
+   .forum-post-container {
+     padding: 30px !important;
+   }
+   .forum-item small {
+     color: #999;
+   }
+   .forum-item .forum-sub-title {
+     color: #999;
+     margin-left: 50px;
+   }
+   .forum-title {
+     margin: 15px 0 15px 0;
+   }
+   .forum-head{
+     font-weight: 300;
+     font-size: 50px;
+     color: #4723D9;
+   }
+   .forum-info {
+     text-align: center;
+     line-height: 2.1rem;
+     justify-content: center;
+     text-align: center;
+   }
+   .forum-desc {
+     color: #999;
+   }
+   a.forum-item-title {
+     color: inherit;
+     display: block;
+     font-size: 20px;
+     font-weight: 600;
+   }
+   a.forum-item-title:hover {
+     color: inherit;
+   }
+
+   @media (max-width: 992px) {
+     .forum-info {
+       margin: 15px 0 10px 0;
+       /* Comment this is you want to show forum info in small devices */
+       display: none;
+     }
+     .forum-desc {
+       float: none !important;
+     }
+   }
+   
+   
+   
+   
+   
+   .ibox {
+     clear: both;
+     margin-bottom: 25px;
+     margin-top: 0;
+     padding: 0;
+   }
+   .ibox.collapsed .ibox-content {
+     display: none;
+   }
+   .ibox:after,
+   .ibox:before {
+     display: table;
+   }
+   .ibox-title {
+     -moz-border-bottom-colors: none;
+     -moz-border-left-colors: none;
+     -moz-border-right-colors: none;
+     -moz-border-top-colors: none;
+     background-color: #ffffff;
+     border-color: #e7eaec;
+     border-image: none;
+     border-style: solid solid none;
+     border-width: 3px 0 0;
+     color: inherit;
+     margin-bottom: 0;
+     padding: 14px 15px 7px;
+     min-height: 48px;
+   }
+   .ibox-content {
+     background-color: #ffffff;
+     color: inherit;
+     padding: 15px 20px 20px 20px;
+     border-color: #e7eaec;
+     border-image: none;
+   }
+   .ibox-footer {
+     color: inherit;
+     border-top: 1px solid #e7eaec;
+     font-size: 90%;
+     background: #ffffff;
+     padding: 10px 15px;
+   }
+   
+   .message-input {
+       height: 90px !important;
+   }
+   .form-control, .single-line {
+       background-color: #FFFFFF;
+       background-image: none;
+       border: 1px solid #e5e6e7;
+       border-radius: 1px;
+       color: inherit;
+       display: block;
+       padding: 6px 12px;
+       transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+       width: 100%;
+       font-size: 14px;
+   }
+   .m-b-sm {
+       margin-bottom: 10px;
+   }

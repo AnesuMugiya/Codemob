@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Icon CDNs -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'core/css/forum.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'core/css/messaging.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}">
+
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- JQuery script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Titles -->
+  {% if title %}
+    <title>Code Mob - {{ title }}</title>
+  {% else %}
+      <title>Code Mob</title>
+  {% endif %}
+</head>
+
+<body id="body-pd">
+  <header class="header" id="header">
+    <div class="header__toggle">
+      <i class="bx bx-menu" id="header-toggle"></i>
+    </div>
+    <div class="search-bar">
+      <form method="get" action="{% url 'search' %}">
+        <div class="field">
+            <div class="control search-icon">
+                <button class="button is-success"><i class='bx bx-search'></i></button>
+            </div>
+            <div class="control input-text-group">
+                <input type="text" class="input" placeholder="Search" name="query">
+            </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="header-right">
+
+    {% if user.is_authenticated %}
+    <div class="header__icons">
+      <a href="{% url 'home' %}" class="header__link mr-5">
+        <i class='bx bxs-grid-alt'></i>
+      </a>
+      <a href="{% url 'conversations' %}" class="header__link mr-5">
+        <i class='bx bxs-message-square-detail' ></i>
+      </a>
+      <a href="#" class="header__link mr-5">
+        <i class='bx bxs-notification'></i>
+      </a>
+    </div>
+    <div class="header__img">
+      <a href="{% url 'profile' request.user.username %}"><img src="{{ user.profile.image.url }}" alt=""></a>
+    </div>
+    {% else %}
+      <li class="list-group-item list-group-item-light">
+        <a href="{% url 'login'%}">Login</a>
+      </li>
+      <li class="list-group-item list-group-item-light">
+        <a href="{% url 'signup' %}">Sign Up</a>
+      </li>
+    {% endif %}  
+  </div>
+  </header>
+
+  <!-- Side NavBar -->
+  <div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+      <div>
+        <a href="{% url 'home' %}" class="nav__logo">
+          <img src="{% static 'core/img/OwOKID.png' %}" class="nav__logo-icon" alt="">
+          <span class="nav__logo-name">Code Mob</span>
+        </a>
+
+        <div class="nav__list">
+          <a href="{% url 'home' %}" class="nav__link active">
+            <i class="bx bx-grid-alt nav__icon"></i>
+            <span class="nav__name">Home</span>
+          </a>
+          <a href="{% url 'explore'%}" class="nav__link">
+            <i class='bx bx-rocket nav__icon'></i>
+            <span class="nav__name">Explore</span>
+          </a>
+          <a href="{% url 'den'%}" class="nav__link">
+            <i class='bx bx-planet nav__icon'></i>
+            <span class="nav__name">Den</span>
+          </a>
+          <a href="{% url 'forum'%}" class="nav__link">
+            <i class='bx bx-library  nav__icon' ></i>
+            <span class="nav__name">Forum</span>
+          </a>
+          <a href="{% url 'tape'%}" class="nav__link">
+            <i class='bx bx-tv nav__icon'></i>
+            <span class="nav__name">Tapes</span>
+          </a>
+          <a href="#" class="nav__link">
+            <i class='bx bx-cog nav__icon' ></i>
+            <span class="nav__name">More</span>
+          </a>
+        </div>
+      </div>
+
+      <a href="{% url 'logout' %}" class="nav__link">
+        <i class="bx bx-log-out nav__icon"></i>
+        <span class="nav__name">Log Out</span>
+      </a>
+    </nav>
+  </div>
+  
+  <div class="container-fluid row">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% block content %}
+      
+      {% endblock %}
+  </div>
+
+ 
+
+<!-- Popper Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Bootstrap Js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'core/js/main.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+{% block script %}
+{% endblock %}
+</body>
+
+</html>
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">    <link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/style.css' %}">
+
+    {% if title %}
+        <title>Code Mob - {{ title }}</title>
+    {% else %}
+        <title>Code Mob</title>
+    {% endif %}
+</head>
+<body>
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+     <div class="container">
+          <a class="navbar-brand ml-0" href="{% url 'index' %}">
+            <img src="{% static 'core/img/codemoblogo.png' %}" class="d-inline-block align-top" alt="code mob logo">
+            code mob
+          </a>
+          <!-- Toggler/collapsibe Button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <i class="fas fa-bars"> </i>
+          </button>
+        
+          <!-- Navbar links -->
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          
+            <ul class="navbar-nav m-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">home</a>
+              </li>
+             <li class="nav-item">
+               <a class="nav-link" href="#">about</a>
+             </li>
+          </ul>    
+          <ul class="navbar-nav ml-auto">
+             {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'post-create' %}">New Post</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'forum'%}" class="nav-item nav-link">forum</a>
+              </li>
+              <li class="nav-item">
+                <p class="nav-link">{{ user.username }}</p>
+              </li>
+             {% else %}
+             <li class="nav-item">
+               <a class="nav-link" href="{% url 'login' %}">log In</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="{% url 'signup' %}">sign Up</a>
+             </li>
+             {% endif %}         
+            </ul>
+          </div>
+     </div>
+</nav>
+<!-- Navbar End -->
+    <main role="main" class="container-fluid pr-5 pl-5">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="content-section">
+            <h3>Our Sidebar</h3>
+            <p class='text-muted'>You can put any information here you'd like.
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Latest Posts</li>
+                <li class="list-group-item list-group-item-light">Announcements</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-3">
+          <div class="content-section">
+                <form class="form-inline">
+                  <div class="input-group">
+                  <div class="input-group-prepend">
+                   <span class="input-group-text"><i class="fas fa-search"></i></span>
+                  </div>
+                    <input type="text" class="form-control" placeholder="Search">
+                  </div>
+                </form>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html> {% endcomment %}

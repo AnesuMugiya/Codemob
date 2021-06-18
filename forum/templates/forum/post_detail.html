@@ -1,0 +1,100 @@
+{% extends "core/base.html" %}
+{% load filter_tags %}
+{% block content %}
+     <article class="media content-section">
+          <div class="post-votes col-md-1">
+               <div class="vote"><i class="bx bx-up-arrow-alt up-vote"></i></div>
+               <div class="vote"><span class="vote-count">40</span></div>
+               <div class="vote"><i class="bx bx-down-arrow-alt down-vote"></i></div>
+          </div>
+
+          <div class="post-body">
+               <h2 class="post-title">{{ object.title }}</h2>
+               <div class="post-metadata">
+                    <span class="post-time">{{ object.created_at|date:"F d, Y, H:i" }}</span>
+                    <div class="post-tags">
+                    {% with post.tags|split:',' as tags %}
+                    {% for tag in tags %}
+                         <span class="post-tag mr-2">{{ tag }}</span>
+                    {% endfor %}
+                    {% endwith %}
+                    </div>
+               </div>
+               <p class="post-content">{{ object.content|safe }}</p>
+               <div class="post-metadata">
+                    <img class="rounded-circle post-img" src="{{ object.created_by.profile.image.url }}">
+                    <span class="post-user">Asked by <a href="{% url 'user-posts' object.created_by.username %}">{{ object.created_by }}</a></span>
+               </div>
+               <div class="media-body">
+                    {% if object.created_by == user %}
+                    <div>
+                         <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+                         <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                    </div>
+                    {% endif %}
+               
+               </div>
+               <a href="{% url 'forum' %}">back</a>
+          </div>
+     </article>
+	  <!-- Comment saction for Questions -->
+	  {% if not post.comments.all %}
+
+	  {% else %}
+		{% for comment in post.comments.all %}
+		<h3>Comments</h3>
+		<div class="card">
+			<div class="card-body">
+				<p>{{ comment.content|safe }}</p>
+				<div class="post-metadata mb-1">
+				<span class="post-user"><a href="#">{{ comment.created_by }}</a></span>
+				<span class="post-time">{{ comment.created_at }}</span>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		{% endif %}
+	  <!-- Answer section -->
+	  
+	  {% if not post.answers.all %}
+
+	  {% else %}
+			{% for answer in post.answers.all %}
+			
+		<h2>Answer</h2>
+		<div class="content-section row">
+			<div class="post-votes col-md-1">
+				<div class="vote"><i class="bx bx-up-arrow-alt up-vote"></i></div>
+				<div class="vote"><span class="vote-count">40</span></div>
+				<div class="vote"><i class="bx bx-down-arrow-alt down-vote"></i></div>
+			</div>
+				<div class="post-body col-md-11">
+					<p class="post-content">{{ answer.content|safe }}</p>
+					<div class="post-metadata">
+						<img class="rounded-circle post-img" alt="" src="">
+						<span class="post-user">Answer provided by <a href="#">{{ answer.created_by }}</a></span>
+						<span class="post-time">{{ answer.created_at }}</span>
+						<span class="post-comments"><i class='bx bx-comment'></i> 60+</span>
+					</div>
+				</div>
+		</div>
+
+						
+						{% if not answer.comments.all %}
+						{% else %}
+						{% for comment in answer.comments.all %}
+						
+						<div class="card">
+							<div class="card-body">
+								<p>{{ comment.content|safe }}</p>
+								<div class="post-metadata mb-1">
+								<span class="post-user"><a href="#">{{ comment.created_by }}</a></span>
+								<span class="post-time">{{ comment.created_at }}</span>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						{% endif %}
+		{% endfor %}
+		{% endif %}
+{% endblock content %}

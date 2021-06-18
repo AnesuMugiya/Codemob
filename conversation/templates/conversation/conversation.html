@@ -1,0 +1,183 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+
+      <div class="container content-wrapper" id="conversationapp">
+  
+          <!-- Row start -->
+          <div class="row gutters">
+  
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+  
+                  <div class="card m-0">
+  
+                      <!-- Row start -->
+                      <div class="row no-gutters">
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                              <div class="users-container">
+                                  <!-- <div class="chat-search-box">
+                                      <div class="input-group">
+                                          <input class="form-control" placeholder="Search">
+                                          <div class="input-group-btn">
+                                              <button type="button" class="btn btn-info">
+                                                  <i class="fa fa-search"></i>
+                                              </button>
+                                          </div>
+                                      </div>
+                                  </div> -->
+
+
+                                  <div class="search-bar">
+                                    <form method="get" action="{% url 'search' %}">
+                                      <div class="field">
+                                          <div class="control search-icon">
+                                              <button class="button is-success"><i class='bx bx-search'></i></button>
+                                          </div>
+                                          <div class="control input-text-group">
+                                              <input type="text" class="input" placeholder="Search" name="query">
+                                          </div>
+                                      </div>
+                                    </form>
+                                  </div>
+
+
+                                  <ul class="users">
+                                      {% for conversation in request.user.conversations.all %}
+                                      <li class="person" data-chat="person1">
+                                        {%for user in conversation.users.all %}
+                                        {% if user != request.user %}
+                                        <a href="{%url 'conversation' user.id %}">
+                                          <div class="user">
+                                              <img src="{{ user.profile.image.url }}" alt="Retail Admin">
+                                              <span class="status busy"></span>
+                                          </div>
+                                          <p class="name-time">
+                                              <span class="name">{{ user.username }}</span>
+                                              <span class="time">{{ conversation.modified_at|timesince}}</span>
+                                          </p>
+                                          </a>
+                                          {% endif %}
+                                        {% endfor %}
+                                      </li>
+                                   {% empty %}
+                                        <P>No conversations.</p>
+                                   {% endfor %}
+                                      
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                              <div class="selected-user">
+                              {%for user in conversation.users.all %}
+                                    {% if user != request.user %}
+                                        
+                                  <span>To: <span class="name">{{ user.username }}</span></span>
+                                {% endif %}
+                            {% endfor %}
+                              </div>
+                              <div class="chat-container">
+                                  <ul class="chat-box chatContainerScroll">
+                                  {% for message in conversation.messages.all %}
+                                      <li class="chat-left">
+                                          <div class="chat-avatar">
+                                              <img src="{{ message.created_by.profile.image.url }}" alt="Retail Admin">
+                                              <div class="chat-name">{{ message.created_by.username }}</div>
+                                          </div>
+                                          <div class="chat-text">{{ message.content }}</div>
+                                          <div class="chat-hour">{{ message.created_at|timesince }}</div>
+                                      </li>
+                                    {% endfor %}
+
+                                      <li class="oink chat-left" v-for="message in messages">
+                                        <div class="chat-avatar">
+                                              <img  :src="message.image"alt="Retail Admin">
+                                              <div class="chat-name">[[ message.user ]]</div>
+                                          </div>
+                                        <div class="chat-text">[[ message.content ]]</div>
+                                        <div class="chat-hour">[[ message.user ]]</div>
+                                      </li>   
+                                  </ul>
+
+                                  <form v-on:submit.prevent="submitMessage()">
+                                    <div class="field">
+                                        <div class="control form-group mt-3 mb-0">
+                                            <textarea class="textarea form-control" rows="3" v-model="content" placeholder="Type your message here..."></textarea>
+                                        </div>
+                                    </div>
+                        
+                                    <div class="field">
+                                        <div class="control">
+                                            <button class="button bg-success">Send</button>
+                                        </div>
+                                    </div>
+                                </form>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Row end -->
+                  </div>
+  
+              </div>
+  
+          </div>
+          <!-- Row end -->
+  
+      </div>
+      <!-- Content wrapper end -->
+  
+  </div>
+
+{% endblock %}
+{% block script %}
+<script>
+    var conversationapp = new Vue({
+        el: '#conversationapp',
+        delimiters: ['[[', ']]'],
+        data () {
+            return {
+                messages: [],
+                content: '',
+                user: '{{ request.user.username }}',
+                created_at: 'Now',
+                image: '{% if request.user.profile.image %}{{ request.user.profile.image.url }}{% endif %}'
+            }
+        },
+        methods: {
+            submitMessage() {
+                if (this.content.length > 0) {
+                    var message = {
+                        'content': this.content,
+                        'user': this.user,
+                        'created_at': this.created_at,
+                        'image': this.image,
+                        'conversation_id': '{{ conversation.id }}'
+                    };
+
+                    this.messages.unshift(message);
+
+                    fetch('/api/add_message/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        credentials: 'same-origin',
+                        body: JSON.stringify(message)
+                    })
+                    .then((response) => {
+                        console.log(response)
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+
+                    this.content = '';
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html> 
+{% endblock %}

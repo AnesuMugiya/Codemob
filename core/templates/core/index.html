@@ -1,0 +1,559 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!-- Favicon -->
+     <link rel="shortcut icon" type="image/jpg" href="{% static 'core/img/codemoblogo.png' %}"/>
+
+     <!-- Owl Carousel CSS -->
+     <link rel="stylesheet" href="{% static 'core/css/owl.carousel.min.css' %}">
+     <link rel="stylesheet" href="{% static 'core/css/owl.theme.default.min.css' %}">
+
+     <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+     
+     <!-- Custom CSS -->
+     <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
+     <link rel="stylesheet" href="{% static 'core/css/bg.css' %}">
+
+     <!-- Title -->
+     <title>Code Mob</title>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- Preloader Start -->
+<div class="preloader" id="preloader">
+  <span></span>
+</div>
+<!-- Preloader End -->
+
+<!--NavBar Start -->
+<nav class="navbar navbar-expand-lg fixed-top">
+     <div class="container">
+          <a class="navbar-brand ml-0" href="{% url 'index' %}">
+            <img src="{% static 'core/img/OwOKID.png' %}" class="d-inline-block align-top" alt="code mob logo">
+            code mob
+          </a>
+          <!-- Toggler/collapsibe Button -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <i class="fas fa-bars"> </i>
+          </button>
+        
+          <!-- Navbar links -->
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          
+            <ul class="navbar-nav m-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">home</a>
+              </li>
+              <li class="nav-item">
+               <a class="nav-link" href="#">features</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="#">explore</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="#">about</a>
+             </li>
+          </ul>
+          
+          <ul class="navbar-nav ml-auto">
+             <form class="form-inline">
+               <div class="input-group">
+                 <div class="input-group-prepend">
+                   <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="white" width="18px" height="18px"><g><rect fill="none" height="24" width="24"/></g><g><path d="M20.29,18.88l-5.56-5.56c1.13-1.55,1.63-3.58,0.98-5.74c-0.68-2.23-2.57-3.98-4.85-4.44C6.21,2.2,2.2,6.22,3.14,10.86 c0.46,2.29,2.21,4.18,4.44,4.85c2.16,0.65,4.19,0.15,5.74-0.98l5.56,5.56c0.39,0.39,1.02,0.39,1.41,0l0,0 C20.68,19.9,20.68,19.27,20.29,18.88z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z"/></g></svg></span>
+                 </div>
+                 <input type="text" class="form-control" placeholder="Search">
+               </div>
+             </form>
+             <li class="nav-item">
+               <a class="nav-link" href="{% url 'login' %}">log In</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="{% url 'signup' %}">sign Up</a>
+             </li>          
+            </ul>
+          </div>
+     </div>
+</nav>
+<!--NavBar End -->
+
+<!-- Home Section Start -->
+<section class="index align-items-center" id="home" data-scroll-index="0">
+  <div class="effect-wrap">
+    <div class="stars effect" id="stars"></div>
+    <div class="stars effect" id="stars2"></div>
+    <div class="stars effect" id="stars3"></div>
+
+  </div>
+     <div class="container">
+          <div class="row align-items-center">
+               <div class="col-md-7">
+                    <div class="index-text">
+                         <h1>Making code, more accessible</h1>
+                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum id earum dignissimos veniam unde culpa tempore, 
+                         optio quis ullam? Harum labore unde iusto iure! Soluta nihil commodi distinctio adipisci. Amet!</p>
+                         <div class="index-btn">
+                              <a href="#" data-scroll-goto="3" class="btn btn-1">read more</a>
+                              <button type="button" class="btn btn-1 video-play-btn">
+                                <i class="fas fa-play"></i>
+                              </button>
+                         </div>
+                    </div>
+               </div>
+               <div class="col-md-5 text-center">
+                    <div class="index-img">
+                         <div class="circle">
+                         </div>
+                         <img src="{% static 'core/img/ast.png' %}" alt="code mob">
+                    </div>
+               </div>
+          </div>
+     </div>
+</section> 
+<!-- Home Section End -->
+
+<!-- Features Section Start -->
+<section class="features section-padding" id="features">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h2>awesome <span>features</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="owl-carousel owl-theme features-carousel">
+        <div class="feature-item">
+          <div class="icon"><i class="fas fa-code"></i></div>
+          <h3>clean code</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias ea commodi in tempore eius tenetur?</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon"><i class="fas fa-edit"></i></div>
+          <h3>forum</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias ea commodi in tempore eius tenetur?</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon"><i class="fas fa-paint-brush"></i></div>
+          <h3>private messaging</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias ea commodi in tempore eius tenetur?</p>
+        </div>
+        <div class="feature-item">
+          <div class="icon"><i class="fas fa-check"></i></div>
+          <h3>video tutorials</h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias ea commodi in tempore eius tenetur?</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Features Section End -->
+
+<!-- Fun Fact Section Start -->
+<section class="fun-facts section-padding">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-5 d-flex align-items-center justify-content-center">
+        <div class="fun-facts-img">
+          <img src="{% static 'core/img/planet.png' %}" alt="fun facts">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-7">
+        <div class="section-title">
+          <h2>fun <span>facts</span></h2>
+        </div>
+        <div class="fun-facts-text">
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates dolore odio libero minus eveniet nesciunt iusto perspiciatis. 
+            Accusantium facilis facere neque itaque quae provident quam. Nulla nihil veniam autem aut!</p>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="fun-fact-item style-1">
+                <h3>200</h3>
+                <span>questions</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="fun-fact-item style-2">
+                <h3>500</h3>
+                <span>users</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="fun-fact-item style-3">
+                <h3>1000</h3>
+                <span>likes</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="fun-fact-item style-4">
+                <h3>750</h3>
+                <span>donations</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Fun Fact Section End -->
+
+<!-- Explore Section Start -->
+<section class="explore section-padding" id="explore">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h2>explore <span>codemob</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="owl-carousel owl-theme screenshots-carousel">
+        <div class="screenshot-item">
+          <img src="{% static 'core/img/app-screenshots/1.png' %}" alt="screenshot">
+        </div>
+        <div class="screenshot-item">
+          <img src="{% static 'core/img/app-screenshots/2.png' %}" alt="screenshot">
+        </div>
+        <div class="screenshot-item">
+          <img src="{% static 'core/img/app-screenshots/3.png' %}" alt="screenshot">
+        </div>
+        <div class="screenshot-item">
+          <img src="{% static 'core/img/app-screenshots/2.png' %}" alt="screenshot">
+        </div>
+        <div class="screenshot-item">
+          <img src="{% static 'core/img/app-screenshots/3.png' %}" alt="screenshot">
+        </div>
+      </div>
+  </div>
+
+</section>
+<!-- Explore Section End -->
+
+<!-- IDK Section Start -->
+<section class="web-info section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h2>website <span>info</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-4 col-md-6">
+        <div class="web-info-item">
+          <i class="fab fa-google-play"></i>
+          <h3>google play</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+          <a href="#" class="btn btn-2">check it out</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="web-info-item">
+          <i class="fab fa-apple"></i>
+          <h3>apple store</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+          <a href="#" class="btn btn-2">check it out</a>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="web-info-item">
+          <i class="fab fa-windows"></i>
+          <h3>microsoft store</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+          <a href="#" class="btn btn-2">check it out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- IDK Section End -->
+
+<!-- Steps Section Start -->
+<section class="steps section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h2>join our <span>community</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="steps-item line-right">
+          <div class="step">1</div>
+          <h3>sign up</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="steps-item line-right">
+          <div class="step">2</div>
+          <h3>create profile</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="steps-item line-right">
+          <div class="step">3</div>
+          <h3>join circuit</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="steps-item line-right last">
+          <div class="step">4</div>
+          <h3>learn and share</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Steps Section End -->
+
+<!-- Steps Section Start -->
+<section class="honourable-mentions section-padding">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h2>mentors to <span>follow</span></h2>
+        </div>
+      </div>
+    </div>
+    <div class="owl-carousel owl-theme mentions-carousel">
+      <div class="mention-item">
+        <div class="img-box">
+          <img src="{% static 'core/img/testimonial/1.jpg' %}" alt="mentor">
+          <i class="fas fa-quote-right"></i>
+        </div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h3>nesy black</h3>
+        <span>Python master</span>
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="mention-item">
+        <div class="img-box">
+          <img src="{% static 'core/img/testimonial/2.jpg' %}" alt="mentor">
+          <i class="fas fa-quote-right"></i>
+        </div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h3>nesy black</h3>
+        <span>Python master</span>
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="mention-item">
+        <div class="img-box">
+          <img src="{% static 'core/img/testimonial/3.jpg' %}" alt="mentor">
+          <i class="fas fa-quote-right"></i>
+        </div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h3>nesy black</h3>
+        <span>Python master</span>
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="mention-item">
+        <div class="img-box">
+          <img src="{% static 'core/img/testimonial/4.jpg' %}" alt="mentor">
+          <i class="fas fa-quote-right"></i>
+        </div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <h3>nesy black</h3>
+        <span>Python master</span>
+        <div class="rating">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- Steps Section End -->
+
+<!-- About Section Start -->
+<section class="about section-padding" id="about">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-title">
+          <h2>about <span>the</span> community</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div id="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header" data-toggle="collapse" data-target="#collapse-01">
+              <h3>100% Fluid Responsive - Fits any device perfectly</h3>
+            </div>
+            <div class="collapse show" id="collapse-01" data-parent="#accordion">
+              <div class="accordion-body">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header collapsed" data-toggle="collapse" data-target="#collapse-02">
+              <h3>Clean code</h3>
+            </div>
+            <div class="collapse" id="collapse-02" data-parent="#accordion">
+              <div class="accordion-body">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header collapsed" data-toggle="collapse" data-target="#collapse-03">
+              <h3>flat, mordern and clean design</h3>
+            </div>
+            <div class="collapse" id="collapse-03" data-parent="#accordion">
+              <div class="accordion-body">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header collapsed" data-toggle="collapse" data-target="#collapse-04">
+              <h3>custom font support</h3>
+            </div>
+            <div class="collapse" id="collapse-04" data-parent="#accordion">
+              <div class="accordion-body">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- About Section Start -->
+
+<!-- Footer Section Start -->
+<section class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-col">
+          <h3>about us</h3>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis id corporis dolores omnis ducimus tenetur voluptates.</p>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-col">
+          <h3>company</h3>
+          <ul>
+            <li><a href="#">privacy policy</a></li>
+            <li><a href="#">terms & conditions</a></li>
+            <li><a href="#">about</a></li>
+            <li><a href="#">contact us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-col">
+          <h3>quick links</h3>
+          <ul>
+            <li><a href="#">home</a></li>
+            <li><a href="#">features</a></li>
+            <li><a href="#">support</a></li>
+            <li><a href="#">blog</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="footer-col">
+          <h3>social pages</h3>
+          <ul>
+            <li><a href="#">facebook</a></li>
+            <li><a href="#">twitter</a></li>
+            <li><a href="#">linkedin</a></li>
+            <li><a href="#">instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <p class="copyright-text">&copy; 2021 CodeMob, Inc</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Footer Section End -->
+
+<!-- Toogle theme Start -->
+<div class="toggle-theme">
+  <i class="fas"></i>
+</div>
+<!-- Toogle theme End -->
+
+<!-- Video Popup Start -->
+  <div class="video-popup">
+    <div class="video-popup-inner">
+      <i class="fas fa-times video-popup-close"></i>
+      <div class="iframe-box">
+        <iframe id="player-1" src="https://www.youtube.com/embed/gPX5a7E8XRk" allow="accelerometer; autoplay; 
+        clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+      </div>
+    </div>
+  </div>
+<!-- Video Popup End -->
+     
+</div>
+
+<!-- JQuery Script -->
+<script src="{% static 'core/js/jquery.min.js' %}"></script>
+
+<!-- Popper Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!-- Bootstrap Js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Owl Carousel Js -->
+<script src="{% static 'core/js/owl.carousel.min.js' %}"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'core/js/index.js' %}"></script>
+</body>
+</html>
+
+
+
+

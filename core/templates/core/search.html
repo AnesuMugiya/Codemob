@@ -1,0 +1,142 @@
+{% extends 'core/base.html' %}
+{% load humanize %}
+{% load filter_tags %}
+{% block content %}
+
+<div class="col-md-8">
+	<div class="content-section">
+		<h1 class="title"> Search </h1>
+		<p> search term: "{{ query }}"</p>
+		</br>
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#all">All</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#posts">Posts</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#users">Users</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#videos">Videos</a>
+			</li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div id="all" class="tab-pane active"><br>
+				<h3>All</h3>
+				<!-- Displays Message If no Results -->
+				{% if not users and not posts %}
+						<p>No results.</p>
+				{% endif %}
+				<!-- Displays Users -->
+				{% if users %}
+					{% for user in users %}
+						<p><a href="{% url 'profile' user.username %}">{{ user.username }}</a></p>
+					{% endfor %}   
+				{% endif %}
+				<!-- Displays Posts -->
+				{% if posts %}
+					<div class="wrapper">
+						<h2>questions</h2>
+						{% for post in posts %}
+						<article class="post-model row">
+						<div class="post-votes col-md-1">
+							<div class="vote"><i class="bx bx-up-arrow-alt up-vote"></i></div>
+							<div class="vote"><span class="vote-count">40</span></div>
+							<div class="vote"><i class="bx bx-down-arrow-alt down-vote"></i></div>
+						</div>
+
+							<div class="post-body col-md-11">
+								<h2><a class="post-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+								<p class="post-content">{{ post.content|safe }}</p>
+
+								<div class="post-tags">
+								{% with post.tags|split:',' as tags %}
+								{% for tag in tags %}
+									<span class="post-tag mr-2">{{ tag }}</span>
+								{% endfor %}
+								{% endwith %}
+								</div>
+								<div class="post-metadata">
+									<img class="rounded-circle post-img" src="{{ post.created_by.profile.image.url }}">
+									<span class="post-user">Asked by <a href="{% url 'user-posts' post.created_by.username %}">{{ post.created_by }}</a></span>
+									<span class="post-time">{{ post.created_at|naturaltime}}</span>
+									<span class="post-comments"><i class='bx bx-comment'></i> 60+</span>
+								</div>
+							</div>
+						</article>
+						{% endfor %}
+					</div>
+				{% endif %}			
+			</div>
+			<div id="posts" class="tab-pane fade"><br>
+				<h3>Posts</h3>
+				<!-- Displays Message If no Posts -->
+				{% if not posts %}
+						<p>No posts.</p>
+				{% endif %}
+				<!-- Displays Posts -->
+				{% if posts %}
+						{% for post in posts %}
+						<article class="post-model row">
+						<div class="post-votes col-md-1">
+							<div class="vote"><i class="bx bx-up-arrow-alt up-vote"></i></div>
+							<div class="vote"><span class="vote-count">40</span></div>
+							<div class="vote"><i class="bx bx-down-arrow-alt down-vote"></i></div>
+						</div>
+
+							<div class="post-body col-md-11">
+								<h2><a class="post-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+								<p class="post-content">{{ post.content|safe }}</p>
+
+								<div class="post-tags">
+								{% with post.tags|split:',' as tags %}
+								{% for tag in tags %}
+									<span class="post-tag mr-2">{{ tag }}</span>
+								{% endfor %}
+								{% endwith %}
+								</div>
+								<div class="post-metadata">
+									<img class="rounded-circle post-img" src="{{ post.created_by.profile.image.url }}">
+									<span class="post-user">Asked by <a href="{% url 'user-posts' post.created_by.username %}">{{ post.created_by }}</a></span>
+									<span class="post-time">{{ post.created_at|naturaltime}}</span>
+									<span class="post-comments"><i class='bx bx-comment'></i> 60+</span>
+								</div>
+							</div>
+						</article>
+						{% endfor %}
+				{% endif %}											
+			</div>
+			<div id="users" class="tab-pane fade"><br>
+				<h3>Users</h3>
+				<!-- Displays Message If no Users -->
+				{% if not users %}
+						<p>No users</p>
+				{% endif %}
+				<!-- Displays Users -->
+				{% if users %}
+					{% for user in users %}
+						<p><a href="{% url 'profile' user.username %}">{{ user.username }}</a></p>
+					{% endfor %}   
+				{% endif %}
+				
+			</div>
+			<div id="videos" class="tab-pane fade"><br>
+				<h3>Videos</h3>
+				<!-- FUCNTIONALITY YET IMPLEMENTED -->
+				{% comment %} {% if not videos %}
+						<p>No videos</p>
+				{% endif %} {% endcomment %}
+				<p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore inventore cum mollitia deleniti officia debitis consequatur velit incidunt, molestias quidem, nihil odio! Beatae, nesciunt culpa magnam cum maiores omnis asperiores.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-4">
+
+</div>
+
+{% endblock %}

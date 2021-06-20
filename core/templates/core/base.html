@@ -64,9 +64,22 @@
         <i class='bx bxs-notification'></i>
       </a>
     </div>
-    <div class="header__img">
-      <a href="{% url 'profile' request.user.username %}"><img src="{{ user.profile.image.url }}" alt=""></a>
+    
+    <div class="dropdown show right">
+      <a class="dropdown-toggle text-muted" class="header__img" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="header__img"src="{{ user.profile.image.url }}" alt="Admin">
+      </a>
+    
+      <div class="dropdown-menu mt-3" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="{% url 'profile' request.user.username %}"><i class="fas fa-user"></i> Profile</a>
+        <a class="dropdown-item" href="{% url 'createchannel' %}">Channel</a>
+        <a class="dropdown-item" href="#"><i class="fas fa-sliders-h"></i> Settings</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Signout</a>
+      </div>
     </div>
+  </div>
+
     {% else %}
       <li class="list-group-item list-group-item-light">
         <a href="{% url 'login'%}">Login</a>
@@ -147,6 +160,12 @@
 <script src="{% static 'core/js/main.js' %}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+	document.querySelector(".right ul li").addEventListener("click", function(){
+		  this.classList.toggle("active");
+	});
+</script>
 {% block script %}
 {% endblock %}
 </body>

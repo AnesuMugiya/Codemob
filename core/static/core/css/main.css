@@ -1,6 +1,7 @@
 /*===== GOOGLE FONTS =====*/
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@400;600;700&display=swap');
 
 /*===== VARIABLES CSS =====*/
 :root{
@@ -14,7 +15,7 @@
   --body-color: #f5eeff;
 
   /*===== Font and typography =====*/
-  --body-font: 'Nunito', sans-serif;
+  --body-font: 'Source Sans Pro', sans-serif;
   --normal-font-size: 1rem;
   --text-color: #252525;
   
@@ -120,20 +121,22 @@ a:hover{
   color: #676767;
   font-size: 1.5rem !important;
 }
-.header__img{
+/* .header__img{
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   border-radius: 50%;
   overflow: hidden;
-}
+} */
 .header-right{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.header__img img{
+.header__img{
+  
+  border-radius: 50%;
   width: 40px;
 }
 
@@ -546,20 +549,20 @@ h1.accounts-to-follow-header{
 }
 
 .video-details {
+  font-size: 15px;
   display: flex;
   flex-direction: column;
 }
 
 .video-title {
-  font-size: 1.1rem;
+  font-size: 17px;
   font-weight: bold;
-  margin-bottom: 3px !important;
+  margin-bottom: 1px !important;
   text-decoration: none;
   color: black;
 }
 
 .video-channel-name {
-  margin-bottom: 1px !important;
   text-decoration: none;
   transition: color 150ms;
 }
@@ -603,14 +606,14 @@ h1.accounts-to-follow-header{
 
 
 .category {
-  margin: 5px;
+  margin: 4px;
   word-wrap: none;
   white-space: nowrap;
   border: solid 0.5px #f0ebf8;
   border-radius: 900px;
   background-color: var(--body-color);
-  padding: 4px 6px;
-  font-size: inherit;
+  padding: 2px 4px;
+  font-size: 15px;
   cursor: pointer;
   transition: background-color 150ms;
 }
@@ -630,3 +633,167 @@ h1.accounts-to-follow-header{
 }
 
 /* Tape page section over */
+
+.right ul li .dropdown{
+  position: absolute;
+  top: 65px;
+  right: 0;
+  background: #fff;
+  padding: 10px 25px;
+  border-radius: 5px;
+  display: none;
+}
+.right ul li .dropdown .fas{
+  margin-right: 10px;
+}
+.right ul li .dropdown:before{
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid;
+  border-color: transparent transparent #fff transparent;
+}
+.right ul li.active .dropdown{
+  display: block;
+}
+
+/* Profile page  */
+
+.db-social .jumbotron {
+  margin: 0;
+  background: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: bottom center;
+  color: #fff!important;
+  height: 300px;
+  position: relative;
+  box-shadow: inset 0 0 20px rgba(0,0,0,.3);
+  padding: 0;
+  width: 100%;
+}
+
+.container-fluid {
+  padding: 30px 30px;
+}
+
+.db-social .head-profile {
+  margin-top: -120px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.widget {
+  background: #fff;
+  border-radius: 0;
+  border: none;
+  margin-bottom: 30px;
+}
+.has-shadow {
+  box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+}
+
+.db-social .widget-body {
+  padding: 1rem 1.4rem;
+}
+.widget-body {
+  padding: 1.4rem;
+}
+.pb-0, .py-0 {
+  padding-bottom: 0!important;
+}
+.db-social .image-default img {
+  width: 120px;
+  position: absolute;
+  top: -80px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  box-shadow: 0 0 0 6px rgba(255,255,255,1);
+  z-index: 10;
+}
+.db-social .infos {
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  line-height: 1.8rem;
+}
+.db-social h2 {
+  color: #2c304d;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: .2rem;
+}
+.db-social .location {
+  color: #aea9c3;
+  font-size: 1rem;
+}
+.db-social .follow .btn {
+  padding: 10px 30px;
+}
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+.btn-shadow, .btn-shadow a {
+  color: #5d5386;
+  background-color: #fff;
+  border-color: #fff;
+  box-shadow: 0 1px 15px 1px rgba(52,40,104,.15);
+}
+.db-social .head-profile .actions {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: .5rem;
+}
+.actions {
+  z-index: 999;
+  display: block;
+}
+.actions.dark .dropdown-toggle {
+  color: #2c304d;
+}
+.actions .dropdown-toggle {
+  color: #98a8b4;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.7rem;
+}
+.actions .dropdown-menu {
+  border: none;
+  min-width: auto;
+  font-size: 1rem;
+  border-radius: 4px;
+  padding: 1.4rem 1.8rem;
+  text-align: left;
+  box-shadow: 1px 1px 30px rgba(0,0,0,.15);
+}
+
+.actions .dropdown-menu .dropdown-item {
+  padding: .5rem 0;
+}
+.actions .dropdown-menu a {
+  color: #2c304d;
+  font-weight: 500;
+}
+
+.db-social .head-profile li:first-child {
+  padding-left: 0;
+}
+.db-social .head-profile li {
+  display: inline-block;
+  text-align: center;
+  padding: 0 1rem;
+}
+.db-social .head-profile li .counter {
+  color: #2c304d;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.db-social .head-profile li .heading {
+  color: #aea9c3;
+  font-size: 1rem;
+}

@@ -2,6 +2,7 @@
 {% load filter_tags %}
 {% block content %}
 
+<div class="col-md-8">
      <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
      {% for post in posts %}
           <article class="media content-section">
@@ -37,4 +38,5 @@
                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
           {% endif %}
      {% endif %}
+</div>
 {% endblock content %}

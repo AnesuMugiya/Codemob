@@ -164,12 +164,12 @@
 	<form method="post">
 		{% csrf_token %}
 		<fieldset class="form-group">
-			<legend class="border-bottom mb-4">Answer</legend>
+			<legend class="border-bottom mb-4">Post Answer</legend>
 			{{ answerform.media }}
 			{{ answerform|crispy }}
 	 	</fieldset>
 		 <div class="form-group">
-			<button class="btn btn-outline-info" type="submit">Post</button>
+			<button class="btn btn-dark" type="submit">Post</button>
 	 	</div>
 	</form>
    {% endif %}

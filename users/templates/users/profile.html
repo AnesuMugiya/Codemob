@@ -2,9 +2,72 @@
 {% load humanize %}
 {% load filter_tags %}
 {% block content %}
-<div class="col-md-8">
-<div class="content-section">
-  <div class="media">
+
+
+  <div class="container db-social">
+    <div class="jumbotron jumbotron-fluid"></div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-11">
+                <div class="widget head-profile has-shadow">
+                    <div class="widget-body pb-0">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-xl-5 col-md-5 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                                <ul>
+                                    <li>
+                                      <div class="counter">246</div>
+                                      <div class="heading">Reputation</div>
+                                    </li>
+                                    <li>
+                                      <a href="{% url 'followers' user.username %}">
+                                        <div class="counter">{{ user.profile.followed_by.count }}</div>
+                                        <div class="heading">Followers</div>
+                                      </a>
+                                    </li>
+                                    <li>
+                                      <a href="{% url 'following' user.username %}">
+                                        <div class="counter">{{ user.profile.follows.count }}</div>
+                                        <div class="heading">Following</div>
+                                      </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-2 col-md-2 d-flex justify-content-center">
+                                <div class="image-default">
+                                    <img class="rounded-circle" src="{{ user.profile.image.url }}" alt="...">
+                                </div>
+                                <div class="infos">
+                                    <h2>{{ user.username }}</h2>
+                                    <div class="location">{{ user.email }}</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-md-5 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
+                                <div class="follow">
+                                  {% if user == request.user %}
+                                    <a href="{% url 'profile_update'%}" class="btn btn-shadow">Update Profile</a>
+                                  {% endif %}
+                                  {% if user != request.user %}
+                                    <a href="{% url 'conversation' user.id %}" class="btn btn-shadow"><i class="la la-user-plus"></i>Message</a>
+                                    {% if request.user.profile in user.profile.followed_by.all %}
+                                    <a href="{% url 'unfollow_user' user.username %}" class="btn btn-shadow">Unfollow</a>
+                                    {% else %}
+                                    <a href="{% url 'follow_user' user.username %}" class="btn btn-shadow">Follow</a>
+                                    {% endif %}
+                                {% endif %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- <div class="media">
     <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
     <div class="media-body">
       <h2 class="account-heading">{{ user.username }}</h2>
@@ -26,7 +89,7 @@
       {% endif %}
     </div>
   </div>
-</div>
+</div> -->
 <div class="content-section">
       {% for post in user.post_set.all %}
       <article class="post-model row">
@@ -57,8 +120,8 @@
       </article>
       {% endfor %}
   
-</div>
-</div>
+
+
 
 
 {% endblock content %}

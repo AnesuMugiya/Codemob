@@ -60,7 +60,7 @@
 		{% if user.is_authenticated %}
 		{% csrf_token %}
 			<div class="d-flex flex-row add-comment-section mt-4 mb-4">
-				<img class="img-fluid img-responsive rounded-circle mr-2" src="https://i.imgur.com/KLeobJk.jpg" width="38">
+				<img class="img-fluid img-responsive rounded-circle mr-2" src="{{ user.profile.image.url }}" width="38">
 				<input type="text" class="form-control mr-3 question-comment-text" placeholder="Add comment">
 				<button class="btn btn-dark save-question-comment" data-question="{{question.id}}" type="button">Submit</button>
 			</div>
@@ -122,7 +122,7 @@
 		{% if user.is_authenticated %}
 		{% csrf_token %}
 			<div class="d-flex flex-row add-comment-section mt-4 mb-4">
-				<img class="img-fluid img-responsive rounded-circle mr-2" src="https://i.imgur.com/KLeobJk.jpg" width="38">
+				<img class="img-fluid img-responsive rounded-circle mr-2" src="{{ user.profile.image.url }}" width="38">
 				<input type="text" class="form-control mr-3 answer-comment-text" placeholder="Add comment">
 				<button class="btn btn-dark save-answer-comment" data-answer="{{answer.id}}" type="button">Submit</button>
 			</div>

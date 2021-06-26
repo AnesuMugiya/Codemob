@@ -1,125 +1,301 @@
 {% extends "core/base.html" %}
 {% load humanize %}
+{% load static %}
 {% load filter_tags %}
 {% block content %}
 
+<!-- Display for primary user information -->
+<div class="user-identifiers avatar-body">
+  <img class = "profile-art" src="{% static 'core/img/default_art.jpg' %}" alt="">
+  <div class="row">
+    <div class="col-md-1">
+      <img class="profile-img rounded-circle account-img" src="{{ user.profile.image.url }}">
+    </div>
+    <div class="col-md-11 pl-5 align-middle">
+      <h2 class="account-heading">{{ user.username }}</h2>
+    </div>
+  </div>
+</div>
+<!-- End of display -->
 
-  <div class="container db-social">
-    <div class="jumbotron jumbotron-fluid"></div>
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-xl-11">
-                <div class="widget head-profile has-shadow">
-                    <div class="widget-body pb-0">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-xl-5 col-md-5 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
-                                <ul>
-                                    <li>
-                                      <div class="counter">246</div>
-                                      <div class="heading">Reputation</div>
-                                    </li>
-                                    <li>
-                                      <a href="{% url 'followers' user.username %}">
-                                        <div class="counter">{{ user.profile.followed_by.count }}</div>
-                                        <div class="heading">Followers</div>
-                                      </a>
-                                    </li>
-                                    <li>
-                                      <a href="{% url 'following' user.username %}">
-                                        <div class="counter">{{ user.profile.follows.count }}</div>
-                                        <div class="heading">Following</div>
-                                      </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-xl-2 col-md-2 d-flex justify-content-center">
-                                <div class="image-default">
-                                    <img class="rounded-circle" src="{{ user.profile.image.url }}" alt="...">
+  <!-- Section for the users posts -->
+  <div class="content-section col-md-8">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Navbar for the tabs -->
+    <ul class="nav nav-tabs">
+
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" data-toggle="tab" href="#home">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#questions">Forum</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#tapes">Tapes</a>
+      </li>
+    </ul>
+    <!-- End of navbar for the tabs -->
+
+    <div class="tab-content">
+      <!-- Tab page that shows all objects associated with user -->
+      <div id="home" class="tab-pane fade in active">
+        <h3>HOME</h3>
+        <p>Some content.</p>
+      </div>
+      <!-- End of first tab -->
+
+      <!-- Tab page that shows the user's posts on the Forum app -->
+      <div id="questions" class="tab-pane fade">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="wrapper wrapper-content">
+                <div class="ibox-content forum-container">
+                  <div class="forum-title">
+                    <div class="pull-right forum-desc">
+                      <samll>Total posts: {{ user.post_set.all.count }}</samll>
+                    </div>
+                    <h3>Questions</h3>
+                  </div>
+                  <!-- Beginning of loop that shows all of the users posts -->
+                  {% for post in user.post_set.all %}
+                    <div class="forum-item">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a href="{% url 'detail' post.id %}" class="forum-item-title">{{ post.title }}</a>
+                                <div class="post-tags">
+                                  {% with post.tags|split:',' as tags %}
+                                  {% for tag in tags %}
+                                      <span class="post-tag mr-2">{{ tag }}</span>
+                                    {% endfor %}
+                                  {% endwith %}
+                                  <small>Asked by <a href="{% url 'user-posts' post.created_by.username %}">{{ post.created_by }}</a></small>
+                                <small>{{ post.created_at|naturaltime}}</small>
                                 </div>
-                                <div class="infos">
-                                    <h2>{{ user.username }}</h2>
-                                    <div class="location">{{ user.email }}</div>
+                            </div>
+                            <div class="col-md-2 forum-info">
+                              <div class="avatar-group avatar-group-overlapped mr-40 mt-25">
+                                <div class="avatar">
+                                    <img src="{{ post.created_by.profile.image.url }}" alt="user" class="avatar-img rounded-circle">
+                                </div>
+                                <div class="avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user" class="avatar-img rounded-circle">
+                                </div>
+                                <div class="avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="user" class="avatar-img rounded-circle">
                                 </div>
                             </div>
-                            <div class="col-xl-5 col-md-5 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
-                                <div class="follow">
-                                  {% if user == request.user %}
-                                    <a href="{% url 'profile_update'%}" class="btn btn-shadow">Update Profile</a>
-                                  {% endif %}
-                                  {% if user != request.user %}
-                                    <a href="{% url 'conversation' user.id %}" class="btn btn-shadow"><i class="la la-user-plus"></i>Message</a>
-                                    {% if request.user.profile in user.profile.followed_by.all %}
-                                    <a href="{% url 'unfollow_user' user.username %}" class="btn btn-shadow">Unfollow</a>
-                                    {% else %}
-                                    <a href="{% url 'follow_user' user.username %}" class="btn btn-shadow">Follow</a>
-                                    {% endif %}
-                                {% endif %}
-                                    
+                                <div> 
+                                    <small>Users</small>
+                                </div>
+                            </div>
+  
+                            <div class="col-md-1 forum-info">
+                                <span class="views-number">
+                                    {{ post.upvote_set.count }}
+                                </span>
+                                <div>
+                                    <small>Votes</small>
+                                </div>
+                            </div>
+                            <div class="col-md-1 forum-info">
+                                <span class="views-number">
+                                    140
+                                </span>
+                                <div>
+                                    <small>Views</small>
                                 </div>
                             </div>
                         </div>
                     </div>
+                  {% endfor %}
+                  <!-- End of loop for displaying posts -->
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
 
-
-
-  <!-- <div class="media">
-    <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-    <div class="media-body">
-      <h2 class="account-heading">{{ user.username }}</h2>
-      <p class="text-secondary">{{ user.email }}</p>
-      <p><a href="{% url 'followers' user.username %}">Followers: {{ user.profile.followed_by.count }}</a></p>
-      <p><a href="{% url 'following' user.username %}"> Follows: {{ user.profile.follows.count }}</a></p>
-
-      {% if user == request.user %}
-        <a href="{% url 'profile_update'%}" class="button is-success">Update Profile</a>
-      {% endif %}
-
-      {% if user != request.user %}
-          <a href="{% url 'conversation' user.id %}" class="button button is-info">Message</a>
-          {% if request.user.profile in user.profile.followed_by.all %}
-          <a href="{% url 'unfollow_user' user.username %}" class="button is-danger">Unfollow</a>
-          {% else %}
-          <a href="{% url 'follow_user' user.username %}" class="button is-success">Follow</a>
-          {% endif %}
-      {% endif %}
+      <!-- Tab that shows all of the users Tapes -->
+      <div id="tapes" class="tab-pane fade">
+        <div class="container">
+          <div class="row">
+               <div class="col-lg-12">
+                    <h2 class="title">Uploads</h2>
+               </div>
+          </div>
+          
+          <section class="video-section">
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+           </section>
+     </div>
+      </div>
+      <!-- End of the tab that ahows users posts -->
     </div>
   </div>
-</div> -->
-<div class="content-section">
-      {% for post in user.post_set.all %}
-      <article class="post-model row">
-           <div class="post-votes col-md-1">
-             <div class="vote"><i class="bx bx-up-arrow-alt up-vote"></i></div>
-             <div class="vote"><span class="vote-count">40</span></div>
-             <div class="vote"><i class="bx bx-down-arrow-alt down-vote"></i></div>
-           </div>
-   
-             <div class="post-body col-md-11">
-               <h2><a class="post-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-               <p class="post-content">{{ post.content|safe }}</p>
-   
-                <div class="post-tags">
-                {% with post.tags|split:',' as tags %}
-                {% for tag in tags %}
-                  <span class="post-tag mr-2">{{ tag }}</span>
-                {% endfor %}
-                {% endwith %}
-                </div>
-               <div class="post-metadata">
-                 <img class="rounded-circle post-img" src="{{ post.created_by.profile.image.url }}">
-                 <span class="post-user">Asked by <a href="{% url 'user-posts' post.created_by.username %}">{{ post.created_by }}</a></span>
-                 <span class="post-time">{{ post.created_at|naturaltime}}</span>
-                 <span class="post-comments"><i class='bx bx-comment'></i> 60+</span>
-               </div>
-           </div>
-      </article>
-      {% endfor %}
-  
+ 
+<!-- Section for the side bar -->
+  <div class="col-md-4">
+    <div class="content-section">
+      <p class="user-bio">This is an example of a user's bio. 
+        This is dummy data hello and it will make absolutely no sense.
+      </p>
+      <small class="text-muted">User joined on Aug 2020</small>
+      <div class="follow-btn">
+        <a class="btn btn-dark" type="submit" href="" value="follow">Follow</a>
+      </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body card-body justify-content-center align-items-center align-middle">
+            <p><a href="{% url 'followers' user.username %}">Followers</a></p>
+            <p><a href="{% url 'followers' user.username %}">{{ user.profile.followed_by.count }}</a></p> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body justify-content-center align-items-center align-middle">
+            <p><a href="{% url 'following' user.username %}">Follows</a></p>
+            <p><a href="{% url 'following' user.username %}">{{ user.profile.followed_by.count }}</a></p> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+        {% if user == request.user %}
+          <a href="{% url 'profile_update'%}" class="button is-success">Update Profile</a>
+        {% endif %}
+
+        {% if user != request.user %}
+            <a href="{% url 'conversation' user.id %}" class="button button is-info">Message</a>
+            {% if request.user.profile in user.profile.followed_by.all %}
+            <a href="{% url 'unfollow_user' user.username %}" class="button is-danger">Unfollow</a>
+            {% else %}
+            <a href="{% url 'follow_user' user.username %}" class="button is-success">Follow</a>
+            {% endif %}
+        {% endif %}
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+  </div>
+<!-- End of section -->
 
 
 

@@ -16,11 +16,11 @@
             <div class="upload-drop" id="drop-zone">
                 just drag and drop file
             </div>
-          </div>
+        </div>
           
-            <div class="video-info " id="upload-info">
+            <div class="video-info hidden-tape-form" id="upload-info">
                 <h2>Video details</h2>
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{%url 'video-data'%}" method="POST" enctype="multipart/form-data">
                 
                   {% csrf_token %}
                   <div>
@@ -33,11 +33,11 @@
                       <textarea name="description" rows="8" cols="30" placeholder="Description"></textarea>
                   </div>
                   <div>
-                    <input type="text" name="category" placeholder="category">
-                  </div>
-                  <div>
                       <span>select a thumbnail</span>
                       <input type="file" name="thumbnail" id="thumbnail" class="p-4">
+                  </div>
+                  <div>
+                    <input type="text" name="category" placeholder="category">
                   </div>
                     <button type="submit">Save</button>
                </form>

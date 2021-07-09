@@ -30,4 +30,18 @@ def upload_processing(request):
         }
         return JsonResponse(data, safe=False)
     return JsonResponse({'error':'an error ocurred'})
+
+def video_info_process(request):
+    if request.method == "POST":
+        file_id=request.POST['videofile']
+        title=request.POST['title']
+        desc=request.POST['description']
+        category=request.POST['category']
+        thumbnail=request.FILES['thumbnail']
+
+        video=get_object_or_404(VideoFiles, id=file_id)
+        VideoDetail.objects.create(videofile=video,title=title, description=desc, thumbnail=thumbnail, category=category,)
+         #message video uploaded successful
+        return redirect('studio', slug=request.user.username)
+    return redirect('file-upload')
     

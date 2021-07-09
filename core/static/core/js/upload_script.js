@@ -1,10 +1,16 @@
 (function(){
-     let standardUpload =document.getElementById('standard-upload')
-      let dropzone=document.getElementById('drop-zone')
+     let standardUpload =document.getElementById('standard-upload');
+      let dropzone=document.getElementById('drop-zone');
+      
+      let filefield=document.getElementById('video_id')
       let token=document.getElementsByName("csrfmiddlewaretoken")[0].value;
       let progressbar=document.getElementById('bar-fill');
       let progressText=document.getElementById('bar-text');
-      let finished=document.getElementById('upload-finish')
+      let finished=document.getElementById('upload-finish');
+
+      let uploadarea=document.getElementById('upload-area');
+      let uploadinfo=document.getElementById('upload-info');
+
         startUpload=function(file){
             app.uploader({
                 file:file,
@@ -28,7 +34,15 @@
                      uploadedElement.appendChild(uploadedVideo)
                      finished.appendChild(uploadedElement)
                      finished.className="upload-completed"
+
+                     uploadarea.className = "hidden-tape-form"
+
+                     uploadinfo.className = "video-info"
+                     filefield.value = data.video_id
+                     
                 },
+
+                
                 error:function(){
                     console.log('upload was not successful')
                 }

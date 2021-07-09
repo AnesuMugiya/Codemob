@@ -273,7 +273,7 @@
         <div class="card">
           <div class="card-body justify-content-center align-items-center align-middle">
             <p><a href="{% url 'following' user.username %}">Follows</a></p>
-            <p><a href="{% url 'following' user.username %}">{{ user.profile.followed_by.count }}</a></p> 
+            <p><a href="{% url 'following' user.username %}">{{ user.profile.follows.count }}</a></p> 
           </div>
         </div>
       </div>

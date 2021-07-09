@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block head_title %}video upload{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'core/css/upload.css' %}">
+<div>
+    <div class="upload-console">
+        <div class="upload-file-body" id="upload-area">
+            <h3>select video to upload</h3>
+            <form action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+               <input type="file" name="file" id="file-upload">
+               <input type="submit" value="Upload Video" id="standard-upload">
+            </form>
+            <div class="upload-drop" id="drop-zone">
+                just drag and drop file
+            </div>
+          </div>
+          
+            <div class="video-info " id="upload-info">
+                <h2>Video details</h2>
+                <form action="" method="POST" enctype="multipart/form-data">
+                
+                  {% csrf_token %}
+                  <div>
+                      <input type="hidden" id="video_id" name="videofile">
+                  </div>
+                  <div class="my-3">
+                       <input type="text" name="title" placeholder="title">
+                  </div>
+                  <div class="my-2">
+                      <textarea name="description" rows="8" cols="30" placeholder="Description"></textarea>
+                  </div>
+                  <div>
+                    <input type="text" name="category" placeholder="category">
+                  </div>
+                  <div>
+                      <span>select a thumbnail</span>
+                      <input type="file" name="thumbnail" id="thumbnail" class="p-4">
+                  </div>
+                    <button type="submit">Save</button>
+               </form>
+            </div>
+
+            <div class="bar">
+                <div class="progressbar" id="bar-fill">
+                     <div id="bar-text"></div>
+                </div>
+            </div>
+        
+
+    </div>
+    <div class="upload-completed" id="upload-finish">
+       
+    </div>
+</div>
+
+<script src="{% static 'core/js/upload.js' %}"></script>
+<script src="{% static 'core/js/upload_script.js'%}"></script>
+{%endblock%} 

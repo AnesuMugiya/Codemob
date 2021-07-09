@@ -12,7 +12,7 @@
   --first-color: #4723D9;
   --first-color-light: #AFA5D9;
   --white-color: #F7F6FB;
-  --body-color: #f5eeff;
+  --body-color: rgb(243, 243, 243);
 
   /*===== Font and typography =====*/
   --body-font: 'Source Sans Pro', sans-serif;
@@ -704,7 +704,7 @@ h1.accounts-to-follow-header{
 
 
 .content-section .nav-tabs{
-  margin-bottom:5%;
+  margin-bottom:15px;
 }
 .content-section .nav-tabs .nav-link{
   font-weight:600;

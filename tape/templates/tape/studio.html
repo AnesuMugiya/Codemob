@@ -7,11 +7,12 @@
 {% block content %}
 <div class="content-section">
 <div class="row p-5">
+    <a class="btn btn-dark" href="{% url 'tape-upload' %}" role="button">Create Tape</a>
     <div class="col-md-12">
         <table class="table">
             <thead>
                 <tr>
-                    <th class="border-0 text-uppercase small font-weight-bold">ID</th>
+                    <th class="border-0 text-uppercase small font-weight-bold">Home</th>
                     <th class="border-0 text-uppercase small font-weight-bold">Item</th>
                     <th class="border-0 text-uppercase small font-weight-bold">Description</th>
                     <th class="border-0 text-uppercase small font-weight-bold">Quantity</th>
@@ -50,3 +51,7 @@
 </div>
 </div>
 {% endblock %}
+
+
+
+

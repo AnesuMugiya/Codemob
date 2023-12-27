@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load humanize %}
+{% block content %}
+<div class="col-md-8">
+     <div class="content-section">
+     <div class="media">
+     <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+     <div class="media-body">
+          <h2 class="account-heading">Following - {{ user.username }}</h2>
+
+          <p> Following Number: {{ user.profile.follows.count }}</p>
+               {% for user in user.profile.follows.all %}
+                    <p><a href="{% url 'profile' user.user.username %}">{{user.user.username}}</a></p>
+               {% empty %}
+                    {% if request.user == user %}
+                         <p>You're not following anyone.</p>
+                    {%else%}
+                         <p> {{user.username }} does not follow anyone.</p>
+                    {% endif %}
+               {%endfor%}
+          </div>
+     </div>
+     </div>
+</div>
+{% endblock %}

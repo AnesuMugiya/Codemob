@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% load humanize %}
+{% block content %}
+<div class="col-md-8">
+     <div class="content-section">
+     <div class="media">
+     <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+     <div class="media-body">
+          <h2 class="account-heading">Followers - {{ user.username }}</h2>
+
+          <p> Followers Number: {{ user.profile.followed_by.count }}</p>        
+          {% for user in user.profile.followed_by.all %}
+               <p><a href="{% url 'profile' user.user.username %}">{{user.user.username}}</a></p>
+          {% empty %}
+               {% if request.user == user %}
+                    <p>Sorry, you do not have any followers. </p>
+               {%else%}
+                    <p> {{user.username }} does not have any followers. </p>
+               {% endif %}
+          {%endfor%}
+          </div>
+     </div>
+     </div>
+</div>
+{% endblock %}

@@ -1,0 +1,647 @@
+{% extends "core/base.html" %}
+{% load humanize %}
+{% load static %}
+{% load filter_tags %}
+{% block content %}
+
+
+<!-- Section for the users posts -->
+<div class="content-section row">
+  <div class="content-section col-md-8">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card question-modal card-modal">
+            <style>
+              .question-modal {
+                background-image: url("{% static 'core/img/geo1.gif' %}");
+                background-repeat: no-repeat;
+                background-size: cover;
+              }
+              .answer-modal {
+                background-image: url("{% static 'core/img/geo2.gif' %}");
+                background-repeat: no-repeat;
+                background-size: cover;
+              }
+              .tape-modal {
+                background-image: url("{% static 'core/img/geo3.gif' %}");
+                background-repeat: no-repeat;
+                background-size: cover;
+              }
+          </style>
+            <a class="card-body" href="#" data-toggle="modal" data-target="#exampleModal">
+              Questions
+              <div class="activity-count">{{ user.post_set.all.count }}</div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card answer-modal card-modal">
+            <a class="card-body" href="#" data-toggle="modal" data-target="#exampleModal2">
+              Answers
+              <div class="activity-count">{{ user.answer_set.all.count }}</div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card tape-modal card-modal">
+            <a class="card-body" href="#" data-toggle="modal" data-target="#exampleModal3">
+              Tapes
+              <div class="activity-count">0</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="wrapper wrapper-content">
+                  <div class="ibox-content forum-container">
+                    <div class="forum-title">
+                      <div class="pull-right forum-desc">
+                        <small>Total posts: {{ user.post_set.all.count }}</small>
+                      </div>
+                      <h3>Questions</h3>
+                    </div>
+                    <!-- Beginning of loop that shows all of the users posts -->
+                    {% for post in user.post_set.all %}
+                      <div class="forum-item">
+                          <div class="row">
+                              <div class="col-md-8">
+                                  <a href="{% url 'detail' post.id %}" class="forum-item-title">{{ post.title }}</a>
+                                  <div class="post-tags">
+                                    {% with post.tags|split:',' as tags %}
+                                    {% for tag in tags %}
+                                        <span class="post-tag mr-2">{{ tag }}</span>
+                                      {% endfor %}
+                                    {% endwith %}
+                                    <small>Asked by <a href="{% url 'user-posts' post.created_by.username %}">{{ post.created_by }}</a></small>
+                                  <small>{{ post.created_at|naturaltime}}</small>
+                                  </div>
+                              </div>
+                              <div class="col-md-2 forum-info">
+                                <div class="avatar-group avatar-group-overlapped mr-40 mt-25">
+                                  <div class="avatar">
+                                      <img src="{{ post.created_by.profile.image.url }}" alt="user" class="avatar-img rounded-circle">
+                                  </div>
+                                  <div class="avatar">
+                                      <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="user" class="avatar-img rounded-circle">
+                                  </div>
+                                  <div class="avatar">
+                                      <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="user" class="avatar-img rounded-circle">
+                                  </div>
+                              </div>
+                                  <div> 
+                                      <small>Users</small>
+                                  </div>
+                              </div>
+    
+                              <div class="col-md-1 forum-info">
+                                  <span class="views-number">
+                                      {{ post.upvote_set.count }}
+                                  </span>
+                                  <div>
+                                      <small>Votes</small>
+                                  </div>
+                              </div>
+                              <div class="col-md-1 forum-info">
+                                  <span class="views-number">
+                                      140
+                                  </span>
+                                  <div>
+                                      <small>Views</small>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    {% endfor %}
+                    <!-- End of loop for displaying posts -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+
+
+        
+        <div class="container">
+            <div class="row">
+                 <div class="col-lg-12">
+                      <h2 class="title">Uploads</h2>
+                 </div>
+            </div>
+            
+            <section class="video-section">
+                 <article class="video-container">
+                   <a href="#" class="thumbnail" data-duration="12:24">
+                     <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                   </a>
+                   <div class="video-bottom-section">
+                     <a href="#">
+                       <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                     </a>
+                     <div class="video-details">
+                       <a href="#" class="video-title">Video Title</a>
+                       <a href="#" class="video-channel-name">Channel Name</a>
+                       <div class="video-metadata">
+                         <span>12K views</span>
+                         •
+                         <span>1 week ago</span>
+                       </div>
+                     </div>
+                   </div>
+                 </article>
+                 <article class="video-container">
+                   <a href="#" class="thumbnail" data-duration="12:24">
+                     <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                   </a>
+                   <div class="video-bottom-section">
+                     <a href="#">
+                       <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                     </a>
+                     <div class="video-details">
+                       <a href="#" class="video-title">Video Title</a>
+                       <a href="#" class="video-channel-name">Channel Name</a>
+                       <div class="video-metadata">
+                         <span>12K views</span>
+                         •
+                         <span>1 week ago</span>
+                       </div>
+                     </div>
+                   </div>
+                 </article>
+                 <article class="video-container">
+                   <a href="#" class="thumbnail" data-duration="12:24">
+                     <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                   </a>
+                   <div class="video-bottom-section">
+                     <a href="#">
+                       <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                     </a>
+                     <div class="video-details">
+                       <a href="#" class="video-title">Video Title</a>
+                       <a href="#" class="video-channel-name">Channel Name</a>
+                       <div class="video-metadata">
+                         <span>12K views</span>
+                         •
+                         <span>1 week ago</span>
+                       </div>
+                     </div>
+                   </div>
+                 </article>
+                 <article class="video-container">
+                   <a href="#" class="thumbnail" data-duration="12:24">
+                     <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                   </a>
+                   <div class="video-bottom-section">
+                     <a href="#">
+                       <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                     </a>
+                     <div class="video-details">
+                       <a href="#" class="video-title">Video Title</a>
+                       <a href="#" class="video-channel-name">Channel Name</a>
+                       <div class="video-metadata">
+                         <span>12K views</span>
+                         •
+                         <span>1 week ago</span>
+                       </div>
+                     </div>
+                   </div>
+                 </article>
+                 <article class="video-container">
+                   <a href="#" class="thumbnail" data-duration="12:24">
+                     <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                   </a>
+                   <div class="video-bottom-section">
+                     <a href="#">
+                       <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                     </a>
+                     <div class="video-details">
+                       <a href="#" class="video-title">Video Title</a>
+                       <a href="#" class="video-channel-name">Channel Name</a>
+                       <div class="video-metadata">
+                         <span>12K views</span>
+                         •
+                         <span>1 week ago</span>
+                       </div>
+                     </div>
+                   </div>
+                 </article>
+                 <article class="video-container">
+                   <a href="#" class="thumbnail" data-duration="12:24">
+                     <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                   </a>
+                   <div class="video-bottom-section">
+                     <a href="#">
+                       <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                     </a>
+                     <div class="video-details">
+                       <a href="#" class="video-title">Video Title</a>
+                       <a href="#" class="video-channel-name">Channel Name</a>
+                       <div class="video-metadata">
+                         <span>12K views</span>
+                         •
+                         <span>1 week ago</span>
+                       </div>
+                     </div>
+                   </div>
+                 </article>
+             </section>
+       </div>
+        
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        
+
+        <div class="container">
+          <div class="row">
+               <div class="col-lg-12">
+                    <h2 class="title">Uploads</h2>
+               </div>
+          </div>
+          
+          <section class="video-section">
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+               <article class="video-container">
+                 <a href="#" class="thumbnail" data-duration="12:24">
+                   <img class="thumbnail-image" src="http://unsplash.it/250/150?gravity=center" />
+                 </a>
+                 <div class="video-bottom-section">
+                   <a href="#">
+                     <img class="channel-icon" src="http://unsplash.it/36/36?gravity=center" />
+                   </a>
+                   <div class="video-details">
+                     <a href="#" class="video-title">Video Title</a>
+                     <a href="#" class="video-channel-name">Channel Name</a>
+                     <div class="video-metadata">
+                       <span>12K views</span>
+                       •
+                       <span>1 week ago</span>
+                     </div>
+                   </div>
+                 </div>
+               </article>
+           </section>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal for following -->
+<div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Supporting</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div class="container-section">
+          <div class="card pl-4 pr-4">
+            {% for user in user.profile.follows.all %}
+              <div class="d-flex justify-content-between mt-2 mb-3 align-items-center border-0">
+                  <div class="d-flex flex-row border-0"> <img src="{{ user.user.profile.image.url }}" class="rounded-circle mr-2" width="50" height="50">
+                      <div class="d-flex flex-column ml-1 about"> <span class="font-weight-bold"><a href="{% url 'profile' user.user.username %}" class="font-weight-bold">{{user.user.username}}</a></span> <small class="text-muted">Mentor</small> </div>
+                  </div> <button class="btn btn-dark btn-sm follow">Follow</button>
+              </div>
+              {% empty %}
+                    {% if request.user == user %}
+                        <p>You're not following anyone.</p>
+                    {%else%}
+                        <p> {{user.username }} does not follow anyone.</p>
+                    {% endif %}
+              {%endfor%}
+          </div>
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for followers -->
+<div class="modal fade" id="exampleModalLong2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Supporters</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-section">
+          <div class="card pl-4 pr-4">
+            {% for user in user.profile.followed_by.all %}
+              <div class="d-flex justify-content-between mt-2 mb-3 align-items-center border-0">
+                  <div class="d-flex flex-row border-0"> <img src="{{ user.user.profile.image.url }}" class="rounded-circle mr-2" width="50" height="50">
+                      <div class="d-flex flex-column ml-1 about"> <span class="font-weight-bold"><a href="{% url 'profile' user.user.username %}" class="font-weight-bold">{{user.user.username}}</a></span> <small class="text-muted">Mentor</small> </div>
+                  </div> <button class="btn btn-dark btn-sm follow">Follow</button>
+              </div>
+              {% empty %}
+                    {% if request.user == user %}
+                        <p>You're not following anyone.</p>
+                    {%else%}
+                        <p> {{user.username }} does not follow anyone.</p>
+                    {% endif %}
+              {%endfor%}
+          </div>
+      </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+      
+
+    <div class="row">
+      <div class="col-md-6 profile-card">
+        <div class="card">
+          <div class="card-body card-body justify-content-center align-items-center align-middle">
+
+
+            <div class="user-identifiers avatar-body">
+              <div class="profile-modal">
+                <div class="profile-img">
+                  <img class="rounded-circle" src="{{ user.profile.image.url }}">
+                </div>
+                <div class="account-details">
+                  <p class="account-heading">{{ user.username }}</p>
+                  <p class="account-type font-weight-light">{{ user.profile.account}}</p>
+                  <p class="account-bio">{{ user.profile.bio }}</p>
+                    <div class="row">
+                      <div class="col-md-4 text-center border-right">
+
+
+                        <p class="follow-count"><a class="follow-count" href="{% url 'following' user.username %}" data-toggle="modal" data-target="#exampleModalLong1">{{ user.profile.follows.count }}</a></p> 
+                        <h6><a class="text-muted mb-1"href="{% url 'following' user.username %}">Supporting</a></h6>
+                      </div>
+                      <div class="col-md-4 text-center border-right">
+                        
+                        <p class="follow-count"><a  class="follow-count" href="{% url 'followers' user.username %}" data-toggle="modal" data-target="#exampleModalLong2">{{ user.profile.followed_by.count }}</a></p>
+                        <h6><a class="text-muted mb-1" href="{% url 'followers' user.username %}">Supporters</a></h6>
+                      </div>
+                      <div class="col-md-4 text-center">
+                        
+                        <p class="follow-count"><a  class="follow-count" href="#">#8</a></p> 
+                        <h6><a class="text-muted mb-1" href="#">Reputation</a></h6>
+                      </div>
+                    </div> 
+                </div>
+              </div>
+            </div>
+            </div>
+
+
+          </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card mb-1">
+          <div class="card-body text-center">
+             
+          <p class="socials-title">Socials</p>
+          <div class="socials d-flex inline-block justify-content-center">
+            <div class="socials">
+            <i class='social-icon bx bxl-github'></i>
+            <i class='social-icon bx bxl-facebook' ></i>
+            <i class='social-icon bx bxl-youtube' ></i>
+          </div>
+          </div>
+          <div class="inline-block mt-3">
+
+              {% if user == request.user %}
+                <a href="{% url 'profile_update'%}" class="btn btn-dark align-items-center">Update Profile</a>
+              {% endif %}
+
+              {% if user != request.user %}
+                  <a href="{% url 'conversation' user.id %}" class="btn btn-dark ml-3 float-left">Message</a>
+                  {% if request.user.profile in user.profile.followed_by.all %}
+                  <a href="{% url 'unfollow_user' user.username %}" class="btn btn-dark float-right">Unfollow</a>
+                  {% else %}
+                  <a href="{% url 'follow_user' user.username %}" class="btn btn-dark mr-5 float-right">Follow</a>
+                  {% endif %}
+              {% endif %}
+          </div>
+        </div>
+      </div>  
+
+      </div>
+    </div>
+     
+
+    
+
+  </div>
+ 
+<!-- Section for the side bar -->
+  <div class="col-md-4 content-section">
+    <div class="container-section">
+      <div class="card pl-4 pr-4 pb-3">
+          <h5 class=" pt-4 pb-3 text-secondary text-center">Similar Profiles</h5>
+          <div class="d-flex justify-content-between mt-2 mb-3 align-items-center border-0">
+              <div class="d-flex flex-row border-0"> <img src="https://i.imgur.com/o5uMfKo.jpg" class="rounded-circle mr-2" width="50">
+                  <div class="d-flex flex-column ml-1 about"> <span class="font-weight-bold">Madison</span> <small class="text-muted">Mentor</small> </div>
+              </div> <button class="btn btn-dark btn-sm follow">Follow</button>
+          </div>
+
+          <div class="d-flex justify-content-between mt-2 mb-3 align-items-center">
+              <div class="d-flex flex-row"> <img src="https://i.imgur.com/tmdHXOY.jpg" class="rounded-circle mr-2" width="50">
+                  <div class="d-flex flex-column ml-1 about"> <span class="font-weight-bold">Anna Sthesia</span> <small class="text-muted">Apprentice</small> </div>
+              </div> <button class="btn btn-dark btn-sm follow">Follow</button>
+          </div>
+          <div class="d-flex justify-content-between mt-2 mb-3 align-items-center">
+              <div class="d-flex flex-row"> <img src="https://i.imgur.com/C4egmYM.jpg" class="rounded-circle mr-2" width="50">
+                  <div class="d-flex flex-column ml-1 about"> <span class="font-weight-bold">Paul Moliv</span> <small class="text-muted">Mentor</small> </div>
+              </div> <button class="btn btn-dark btn-sm follow">Follow</button>
+          </div>
+      </div>
+  </div>
+  
+</div>
+
+<!-- End of section -->
+
+
+
+
+{% endblock content %}

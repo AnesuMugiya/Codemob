@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}create channel{% endblock %}
+
+{% block content %}
+<div class="content-section">
+<div class="pl-4 pr-4">
+    <div class="row mb-3">
+        <div class="main-header col-md-10">User's Tapes</div>
+        <div class="col-md-2"><a class="btn btn-dark" href="{% url 'tape-upload' %}" role="button">Create Tape</a></div>
+    </div>
+    
+        <table class="table table-light">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="border-0 text-uppercase small font-weight-bold">Video</th>
+                    <th class="border-0 text-uppercase small font-weight-bold">Date</th>
+                    <th class="border-0 text-uppercase small font-weight-bold">Views</th>
+                    <th class="border-0 text-uppercase small font-weight-bold">Likes</th>
+                    <th class="border-0 text-uppercase small font-weight-bold">Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for vid in videos%}
+                <tr>
+                    <td>
+                        <div class="row">
+                            <img src="{{vid.videodetail.thumbnail.url}}" style="width: 150px;" alt="" class="ml-4 mr-3">
+                            <div>
+                                <h5>{{vid.videodetail.title}}</h5>
+                                <p>{{vid.videodetail.description|truncatewords:5}}</p>
+                                <a href="{%url 'update-video' vid.id%}" class="btn btn-secondary"><i class='bx bx-refresh'></i></a>
+                                <a href="{%url 'delete-video' vid.id%}" class="btn btn-danger"><i class='bx bx-trash' ></i></a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{vid.uploaded|date:"F d Y"}}</td>
+                    <td>{{vid.view_count.count}}</td>
+                    <td>{{vid.num_likes}}</td>
+                    <td>{{vid.comments.count}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+   
+</div>
+</div>
+{% endblock %}
+
+
+
+

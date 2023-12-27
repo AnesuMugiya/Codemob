@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Icon CDNs -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="{% static 'core/css/messaging.css' %}">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <div class="container">
+   <title>Document</title>
+</head>
+<body>
+      <!-- Page header start -->
+   
+      <!-- Page header end -->
+  
+      <!-- Content wrapper start -->
+      <div class="content-wrapper">
+  
+          <!-- Row start -->
+          <div class="row gutters">
+  
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+  
+                  <div class="card m-0">
+  
+                      <!-- Row start -->
+                      <div class="row no-gutters">
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                              <div class="users-container">
+                                  <div class="chat-search-box">
+                                      <div class="input-group">
+                                          <input class="form-control" placeholder="Search">
+                                          <div class="input-group-btn">
+                                              <button type="button" class="btn btn-info">
+                                                  <i class="fa fa-search"></i>
+                                              </button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <ul class="users">
+                                      <li class="person" data-chat="person1">
+                                          <div class="user">
+                                              <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
+                                              <span class="status busy"></span>
+                                          </div>
+                                          <p class="name-time">
+                                              <span class="name">Steve Bangalter</span>
+                                              <span class="time">15/02/2019</span>
+                                          </p>
+                                      </li>
+                                      
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                              <div class="selected-user">
+                                  <span>To: <span class="name">Emily Russell</span></span>
+                              </div>
+                              <div class="chat-container">
+                                  <ul class="chat-box chatContainerScroll">
+                                      <li class="chat-left">
+                                          <div class="chat-avatar">
+                                              <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
+                                              <div class="chat-name">Russell</div>
+                                          </div>
+                                          <div class="chat-text">Hello, I'm Russell.
+                                              <br>How can I help you today?</div>
+                                          <div class="chat-hour">08:55 <span class="fa fa-check-circle"></span></div>
+                                      </li>
+                                      <li class="chat-right">
+                                          <div class="chat-hour">08:56 <span class="fa fa-check-circle"></span></div>
+                                          <div class="chat-text">Hi, Russell
+                                              <br> I need more information about Developer Plan.</div>
+                                          <div class="chat-avatar">
+                                              <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin">
+                                              <div class="chat-name">Sam</div>
+                                          </div>
+                                      </li>
+                                  </ul>
+                                  <div class="form-group mt-3 mb-0">
+                                      <textarea class="form-control" rows="3" placeholder="Type your message here..."></textarea>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Row end -->
+                  </div>
+  
+              </div>
+  
+          </div>
+          <!-- Row end -->
+  
+      </div>
+      <!-- Content wrapper end -->
+  
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- JQuery Script -->
+<script src="js/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper Js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Bootstrap Js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Custom Js -->
+<script src="{% static 'core/js/main.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</body>
+</html>

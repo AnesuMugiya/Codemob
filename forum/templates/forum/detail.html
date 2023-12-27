@@ -1,0 +1,359 @@
+{% extends 'core\base.html' %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block title %}
+	{{question.title}}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8">
+    
+<!-- Question Detail Display -->
+	<article class="content-section">
+		<div class="row"><h2 class="post-title">{{ question.title }}</h2></div>
+		<hr>
+		<div class="row">
+		<div class="post-votes col-md-1">
+			<div class="vote"><span class="vote-count question-upvote-count-{{question.id}}">{{ question.upvote_set.count }}</span></div>
+			<div class="vote"><i class="bx bx-up-arrow-alt up-vote upvote-question-click" data-question="{{ question.id }}"></i></div>
+			<div class="vote"><i class="bx bx-down-arrow-alt down-vote downvote-question-click" data-question="{{ question.id }}"></i></div>
+			<div class="vote"><span class="vote-count question-downvote-count-{{question.id}}">{{ question.downvote_set.count }}</span></div>
+		</div>
+
+		<div class="post-body col-md-10">
+			<div class="post-head row">
+				<div class="post-image col-md-1">
+					<img class="rounded-circle post-img" src="{{ question.created_by.profile.image.url }}">
+				</div>
+			<div class="post-metadata col-md-10">
+				<div class="post-user">Asked by <a href="{% url 'profile' question.created_by.username %}">{{ question.created_by }}</a></div>
+				<div class="post-time">{{ question.created_at|date:"F d, Y, H:i" }}</div>
+			</div>
+			</div>
+			<p class="post-content">{{ question.content|safe }}</p>
+			<div class="post-metadata">
+				<div class="post-tags">
+					{% for tag in tags %}
+					<span class="post-tag mr-2"><a href="/tag/{{tag|slugify}}">{{tag}}</a></span>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+			<div class="media-body">
+				{% if question.created_by == user %}
+					<div>
+						<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' question.id %}">Update</a>
+						<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' question.id %}">Delete</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</article>
+	<!-- End of Question detail display-->
+
+   <!-- Comment Section for Questions -->
+	<div class="question-comment-wrapper content-section">
+	<div class="coment-bottom bg-white p-2 px-4">
+
+		<!-- Input Comment Field For Question -->
+		{% if user.is_authenticated %}
+		{% csrf_token %}
+			<div class="d-flex flex-row add-comment-section mt-4 mb-4">
+				<img class="img-fluid img-responsive rounded-circle mr-2" src="{{ user.profile.image.url }}" width="38">
+				<input type="text" class="form-control mr-3 question-comment-text" placeholder="Add comment">
+				<button class="btn btn-dark save-question-comment" data-question="{{question.id}}" type="button">Submit</button>
+			</div>
+		{% endif %}
+		<!-- End of Input Comment Field for Question -->
+	
+	{% if not question.comment_set.all %}
+	{% else %}
+		<div class="collapsable-comment">
+			<div class="d-flex flex-row justify-content-between align-items-center action-collapse p-2" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1"><span>{{ question.comment_set.count }} Comments</span><i class="fa fa-chevron-down servicedrop"></i></div>
+				{% if not question.comment_set.all %}
+				{% else %}
+				{% for comment in question.comment_set.all %}
+					<div id="collapse-1" class="collapse">
+							<div class="commented-section mt-2 border-bottom">
+								<div class="d-flex flex-row align-items-center commented-user">
+									<h5 class="mr-2 text-capitalize">{{ comment.created_by }}</h5><span class="dot mb-1"></span>
+									<span class="mb-1 ml-2 text-muted">{{ comment.created_at }}</span>
+								</div>
+								<div class="comment-text-sm mb-3"><span>{{ comment.comment|safe }}</span></div>
+							</div>
+					</div>
+				{% endfor %}
+				{% endif %}
+		</div>	
+	{% endif %}
+	</div>
+	</div>
+	<!-- End of Input Comment field for Question -->
+
+	<!-- Answer section -->
+	{% if not question.answers.all %}
+	{% else %}
+	{% for answer in question.answers.all %}
+	<h2>Answer</h2>
+	<div class="content-section row">
+		<div class="post-votes col-md-1">
+			<div class="vote"><span class="vote-count answer-upvote-count-{{answer.id}}">{{ answer.upvote_set.count }}</span></div>
+			<div class="vote"><i class="bx bx-up-arrow-alt up-vote upvote-answer-click" data-answer="{{ answer.id}}"></i></div>
+			
+			<div class="vote"><i class="bx bx-down-arrow-alt down-vote downvote-answer-click" data-answer="{{ answer.id}}"></i></div>
+			<div class="vote"><span class="vote-count answer-downvote-count-{{answer.id}}">{{ answer.downvote_set.count }}</span></div>
+		</div>
+		<div class="post-body col-md-11">
+			<p class="post-content">{{ answer.content|safe }}</p>
+			<div class="post-metadata">
+				<img class="rounded-circle post-img" alt="" src="{{ answer.created_by.profile.image.url }}">
+				<span class="post-user">Answer provided by <a href="#">{{ answer.created_by }}</a></span>
+				<span class="post-time">{{ answer.created_at }}</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- This is the comment section for the answers -->
+	<div class="answer-comment-wrapper content-section">
+		<div class="coment-bottom bg-white p-2 px-4">
+	
+		<!-- Input Comment Field For Answer -->
+		{% if user.is_authenticated %}
+		{% csrf_token %}
+			<div class="d-flex flex-row add-comment-section mt-4 mb-4">
+				<img class="img-fluid img-responsive rounded-circle mr-2" src="{{ user.profile.image.url }}" width="38">
+				<input type="text" class="form-control mr-3 answer-comment-text" placeholder="Add comment">
+				<button class="btn btn-dark save-answer-comment" data-answer="{{answer.id}}" type="button">Submit</button>
+			</div>
+		{% endif %}
+		<!-- End of Input Comment Field for particular Answer -->
+		
+		<!-- Collapsible Comments for particular answer -->
+		{% if not answer.comment_set.all %}
+		{% else %}
+			<div class="collapsable-comment">
+				<div class="d-flex flex-row justify-content-between align-items-center action-collapse p-2" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-1" href="#collapse-1"><span>{{ answer.comment_set.count }} Comments</span><i class="fa fa-chevron-down servicedrop"></i></div>
+					{% if not answer.comment_set.all %}
+					{% else %}
+					{% for comment in answer.comment_set.all %}
+						<div id="collapse-1" class="collapse">
+								<div class="commented-section mt-2 border-bottom">
+									<div class="d-flex flex-row align-items-center commented-user">
+										<h5 class="mr-2 text-capitalize">{{ comment.created_by }}</h5><span class="dot mb-1"></span>
+										<span class="mb-1 ml-2 text-muted">{{ comment.created_at }}</span>
+									</div>
+									<div class="comment-text-sm mb-3"><span>{{ comment.comment|safe }}</span></div>
+								</div>
+						</div>
+					{% endfor %}
+					{% endif %}
+			</div>	
+		{% endif %}
+		</div>
+		</div>
+	<!-- End of Comments for particular Answer -->
+
+	{% endfor %}
+	{% endif %}
+	<!-- End of Answer Section -->
+
+	<!-- Field for entering the Answers -->
+	<div class="content-section">
+	{% if user.is_authenticated %}
+	<form method="post">
+		{% csrf_token %}
+		<fieldset class="form-group">
+			<legend class="border-bottom mb-4">Post Answer</legend>
+			{{ answerform.media }}
+			{{ answerform|crispy }}
+	 	</fieldset>
+		 <div class="form-group">
+			<button class="btn btn-dark" type="submit">Post</button>
+	 	</div>
+	</form>
+   {% endif %}
+	</div>
+	<!-- End of the field -->
+
+</div>
+
+<!-- Section for trending and tips -->
+<div class="col-md-4">
+    
+</div>
+<!-- End of the trending and tips section -->
+
+{% endblock %}
+{% block script %}
+<script>
+	$(document).ready(function(){
+		// This is for the answer comments
+		$(".save-answer-comment").on('click',function(){
+			var _ansComment=$(".answer-comment-text").val();
+			var _answerid=$(this).data('answer');
+			// Ajax
+			$.ajax({
+				url:"/save-answer-comment",
+				type:"post",
+				data:{
+					comment:_ansComment,
+					answerid:_answerid,
+					csrfmiddlewaretoken:"{{csrf_token}}"
+				},
+				dataType:'json',
+				beforeSend:function(){
+					$(".save-answer-comment").addClass('disabled').text('saving...');
+				},
+				success:function(res){
+					if(res.bool==true){
+						$(".answer-comment-text").val('');
+						// Append Ellement
+						var _html='\
+							<div class="card animate__animated animate__bounce">\
+								<div class="card-body">\
+									<p>'+_ansComment+'</p>\
+									<div class="post-metadata mb-1">\
+									<span class="post-user"><a href="#">{{ request.user }}</a></span>\
+									<span class="post-time">{{ comment.created_at }}</span>\
+									</div>\
+								</div>\
+							</div>\
+						';
+						$(".answer-comment-wrapper").append(_html);
+					}
+					$(".save-answer-comment").removeClass('disabled').text('submit');
+				}
+			});
+		});
+
+		// This sis for the question comments
+		$(".save-question-comment").on('click',function(){
+			var _qnsComment=$(".question-comment-text").val();
+			var _questionid=$(this).data('question');
+			// Ajax	
+			$.ajax({
+				url:"/save-question-comment",
+				type:"post",
+				data:{
+					comment:_qnsComment,
+					questionid:_questionid,
+					csrfmiddlewaretoken:"{{csrf_token}}"
+				},
+				dataType:'json',
+				beforeSend:function(){
+					$(".save-question-comment").addClass('disabled').text('saving...');
+				},
+				success:function(res){
+					if(res.bool==true){
+						$(".question-comment-text").val('');
+						var _html='\
+							<div class="card animate__animated animate__bounce">\
+								<div class="card-body">\
+									<p>'+_qnsComment+'</p>\
+									<div class="post-metadata mb-1">\
+									<span class="post-user"><a href="#">{{ request.user }}</a></span>\
+									<span class="post-time">{{ comment.created_at }}</span>\
+									</div>\
+								</div>\
+							</div>\
+						';
+						$(".question-comment-wrapper").append(_html);
+					}
+					$(".save-question-comment").removeClass('disabled').text('submit');
+				}
+			});		
+		});
+
+		// Up vote section functionality
+
+		//upvote for question
+		$(".upvote-question-click").on('click',function(){
+			var questionid=$(this).data('question');
+			// Ajax
+			$.ajax({
+				url:"/save-question-upvote",
+				type:"post",
+				data:{
+					questionid:questionid,
+					csrfmiddlewaretoken:"{{csrf_token}}"
+				},
+				dataType:'json',
+				success:function(res){
+					var _prevupvote=$(".question-upvote-count-" + questionid).text();
+					if(res.bool==true){
+						$(".question-upvote-count-" + questionid).text(parseInt(_prevupvote)+1);
+					}
+				},
+			});
+		});
+
+		// upvote for answer
+		$(".upvote-answer-click").on('click',function(){
+			var answerid=$(this).data('answer');
+			// Ajax
+			$.ajax({
+				url:"/save-answer-upvote",
+				type:"post",
+				data:{
+					answerid:answerid,
+					csrfmiddlewaretoken:"{{csrf_token}}"
+				},
+				dataType:'json',
+				success:function(res){
+					var _prevupvote=$(".answer-upvote-count-" + answerid).text();
+					if(res.bool==true){
+						$(".answer-upvote-count-" + answerid).text(parseInt(_prevupvote)+1);
+					}
+				},
+			});
+		});
+
+		// down vote funtionality
+		
+		//down vote for question
+		$(".downvote-question-click").on('click',function(){
+			var questionid=$(this).data('question');
+			// Ajax
+			$.ajax({
+				url:"/save-question-downvote",
+				type:"post",
+				data:{
+					questionid:questionid,
+					csrfmiddlewaretoken:"{{csrf_token}}"
+				},
+				dataType:'json',
+				success:function(res){
+					var _prevdownvote=$(".question-downvote-count-" + questionid).text();
+					if(res.bool==true){
+						$(".question-downvote-count-" + questionid).text(parseInt(_prevdownvote)+1);
+					}
+				},
+			});
+		});
+
+		// down vote for answer
+		$(".downvote-answer-click").on('click',function(){
+			var answerid=$(this).data('answer');
+			// Ajax
+			$.ajax({
+				url:"/save-answer-downvote",
+				type:"post",
+				data:{
+					answerid:answerid,
+					csrfmiddlewaretoken:"{{csrf_token}}"
+				},
+				dataType:'json',
+				success:function(res){
+					var _prevdownvote=$(".answer-downvote-count-" + answerid).text();
+					if(res.bool==true){
+						$(".answer-downvote-count-" + answerid).text(parseInt(_prevdownvote)+1);
+					}
+				},
+			});
+		});
+	});
+</script>
+{% endblock %}
+	  
+				

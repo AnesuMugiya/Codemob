@@ -1,0 +1,274 @@
+/* ============= FORUM PAGE ===========*/
+
+.avatar .avatar-img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.avatar-group {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.avatar-group .avatar {
+  font-size: .9rem;
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.avatar-group .avatar .avatar-img {
+  border: 2px solid #fff;
+}
+
+.avatar-group.avatar-group-overlapped .avatar {
+  margin-right: -13px;
+}
+
+.avatar-group.avatar-group-overlapped .avatar:hover {
+  z-index: 1;
+}
+
+.avatar-group.avatar-group-sm.avatar-group-overlapped .avatar {
+  margin-right: -10px;
+}
+
+.forum-post-container .media {
+ margin: 10px 10px 10px 10px;
+ padding: 20px 10px 20px 10px;
+ border-bottom: 1px solid #f1f1f1;
+}
+
+
+  .forum-post-info {
+    padding: 9px 12px 6px 12px;
+    background: #f9f9f9;
+    border: 1px solid #f1f1f1;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .media-body > .media {
+    background: #f9f9f9;
+    border-radius: 3px;
+    border: 1px solid #f1f1f1;
+  }
+  .forum-item {
+    margin: 10px 0;
+    padding: 10px 0 20px;
+    border-bottom: 1px solid var(--borderline-color);
+    left: 50%;
+  }
+  .views-number {
+    margin-top: 5px;
+    font-size: 20px;
+    line-height: 18px;
+    font-weight: 400;
+  }
+  .forum-container,
+  .forum-post-container {
+    padding: 30px !important;
+  }
+  .forum-item small {
+    color: #999;
+  }
+  .forum-item .forum-sub-title {
+    color: #999;
+    margin-left: 50px;
+  }
+  .forum-title {
+    margin: 0 0 15px 0;
+  }
+
+  .forum-info {
+    text-align: center;
+    line-height: 2.1rem;
+    justify-content: center;
+    text-align: center;
+  }
+  .forum-desc {
+    color: #999;
+  }
+  a.forum-item-title {
+    color: inherit;
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  a.forum-item-title:hover {
+    color: inherit;
+  }
+
+  .post-tag, .post-tag a{
+   background-color: #A3FF99;
+   border-radius: 11px;
+   padding: 2px 4px 2px;
+   color: #fff;
+   cursor: pointer;
+   font-size: 15px;
+
+ }
+ .post-tags{
+  margin: 10px 0 10px 0;
+ }
+
+ .post-create {
+   position:fixed;
+   width:60px;
+   height:60px;
+   bottom:40px;
+   right: 50px;
+   background-color: #4166f5;
+   color:#FFF;
+   border-radius:50px;
+   text-align:center;
+   align-items: center;
+   vertical-align: auto;
+   margin: auto;
+   box-shadow: 2px 2px 3px #999;
+   cursor: pointer;
+  }
+  .post-create i{
+   font-size: 40px;
+   color: #ffffff;
+   margin:auto
+  }
+  .post-create i::before{
+   font-size: 25px;
+   color: #ffffff;
+   margin:auto
+  }
+
+  @media (max-width: 992px) {
+    .forum-info {
+      margin: 15px 0 10px 0;
+      /* Comment this is you want to show forum info in small devices */
+      display: none;
+    }
+    .forum-desc {
+      float: none !important;
+    }
+  }
+  
+  
+
+  .col-lg-12{
+   border-right: 1px solid var(--borderline-color);
+  }
+  .ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+  }
+  .ibox.collapsed .ibox-content {
+    display: none;
+  }
+  .ibox:after,
+  .ibox:before {
+    display: table;
+  }
+
+  .ibox-content {
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+  }
+
+  
+  .message-input {
+      height: 90px !important;
+  }
+  .form-control, .single-line {
+      background-color: #FFFFFF;
+      background-image: none;
+      border: 1px solid #e5e6e7;
+      border-radius: 1px;
+      color: inherit;
+      display: block;
+      padding: 6px 12px;
+      transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+      width: 100%;
+      font-size: 14px;
+  }
+  .m-b-sm {
+      margin-bottom: 10px;
+  }
+
+
+  .post-model{
+   background-color: #fff;
+   margin: 20px 0 20px 20px;
+   border-radius: 10px;
+   max-width: 95%;
+  }
+  .post-votes{
+    padding-top: 20px;
+    padding-left: 30px;
+    font-size: 18px;
+    display: inline-block;
+    flex-direction: column;
+    color: #757575;
+    justify-content: center;
+    text-align: center;
+  }
+  .post-votes .votes{
+   display: inline-block;
+   flex-direction: column;
+  }
+  .post-votes i{
+    font-size: 25px;
+    cursor: pointer;
+  }
+  .post-votes i.up-vote:hover{
+   color: green;
+  }
+  .post-votes i.down-vote:hover{
+   color: red;
+  }
+  .post-title {
+    margin-top: 20px;
+    margin-left: 30px;
+    color: #4a4a4a;
+    font-weight: 700;
+  }
+  .post-body{
+   padding: 20px;
+   padding-left: 30px;
+   font-size: 17px;
+   color: var(--text-color);
+  }
+ 
+  .post-tags{
+   margin: 10px 0 20px 0;
+  }
+  .post-user{
+    margin-right: 35px;
+  }
+  
+  .post-content {
+    color: #757575;
+  }
+  
+  .post-img {
+    height: 35px;
+    width: 35px;
+  }
+  
+  .post-metadata {
+    margin-bottom: 5px;
+    font-size: 13px;
+    font-weight: 100;
+  }
+  
+  .post-comments{
+    float: right;
+    margin-right: 20px;
+  }
+
+
+
+  /* #2DE1FC */

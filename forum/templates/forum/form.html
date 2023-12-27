@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% load humanize %}
+
+{% block content %}
+<form action="" method="POST">{% csrf_token %}
+    {{ form.content }}
+</form>
+{% endblock %}

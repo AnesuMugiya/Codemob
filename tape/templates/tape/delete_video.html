@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block head_title %}Delete Video{% endblock %}
+
+
+{%block content%} 
+<div class="container pt-3">
+<div class="text-center mb-5"> 
+<h1>Delete Video</h1>
+</div>
+   <div class="form-group flex">
+      <p class="mb-4 text-center capitalize">Are you sure you want to delete <span class="ml-2">{{video.videodetail.title}}</span></p>
+        <form action="{%url 'delete-video' video.id%}" method="POST" class="align-center">
+           {% csrf_token %}
+           <a href="{%url 'studio' user.username %}" class="btn btn-secondary">Cancel</a>
+           <input type="submit" value="Confirm" class="btn btn-danger">
+        </form>
+   </div>
+</div>
+ 
+
+{% endblock %}
+

@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+{%load static%}
+{% block content %}
+<div class="main-header anim row" style="--delay: 0s">
+   <div class="col-md-10">Explore</div>  
+   <div class="filter-wrapper col-md-2">
+      <i class="fi-rr-settings-sliders"></i>
+      <div class="filter-name">FILTERS</div>
+   </div>
+ </div>
+   <div class="main-blogs">
+      <div class="main-blog anim" style="--delay: .1s; background-image: url('{% static 'core/img/stock/stock2.jpg' %}');">
+         <div class="main-blog__title">Top ten Python tricks you need to know in 2021</div>
+         <div class="main-blog__author">
+         <div class="author-img__wrapper">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+            <path d="M20 6L9 17l-5-5" />
+         </svg>
+         <img class="author-img" src="{% static 'core/img/stock/Ethan.jpg' %}" />
+         </div>
+         <div class="author-detail">
+         <div class="author-name">Ethan Gramley</div>
+         <div class="author-info">53K views <span class="seperate"></span>2 weeks ago</div>
+         </div>
+         </div>
+         <div class="main-blog__time">7 min</div>
+      </div>
+      <div class="main-blog anim" style="--delay: .2s; background-image: url('{% static 'core/img/stock/stock3.jpeg' %}');">
+         <div class="main-blog__title">How to prevent SQL injection</div>
+         <div class="main-blog__author tips">
+         <div class="author-img__wrapper">
+         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check">
+            <path d="M20 6L9 17l-5-5" />
+         </svg>
+         <img class="author-img" src="{% static 'core/img/stock/Anovimaba.jpg' %}" />
+         </div>
+         <div class="author-detail">
+         <div class="author-name">Anovimba Chiwera</div>
+         <div class="author-info">53K views <span></span>2 weeks ago</div>
+         </div>
+         </div>
+         <div class="main-blog__time">7 min</div>
+      </div>
+   </div> 
+{% endblock %}

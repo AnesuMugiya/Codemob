@@ -2,6 +2,12 @@
 
 Codemob is a web application designed to combine the features of a Q&A forum and a tutorial platform. Users can ask questions, watch video tutorials, and interact with mentors to enhance their learning experience. The app is built using Django, Bootstrap, jQuery, and AJAX.
 
+
+
+https://github.com/user-attachments/assets/39f987c7-411a-436e-afc2-67ecb7ae7803
+
+
+
 ## Features
 
 - **Forum:** Users can ask questions and get answers, similar to Stack Overflow.
